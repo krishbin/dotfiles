@@ -1,0 +1,14 @@
+# No arguments: `git status`
+# With arguments: acts like `git`
+g() {
+  if [[ $# -gt 0 ]]; then
+    git "$@"
+  else
+    git status
+  fi
+}
+
+#makedir and change into it
+function mcd() {
+  mkdir -p "$1" && cd "$1";
+}

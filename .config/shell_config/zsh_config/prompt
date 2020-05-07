@@ -1,0 +1,17 @@
+#git-integration
+autoload -Uz vcs_info
+precmd() {vcs_info}
+zstyle ':vcs_info:git*' formats "%F{240}(%b)%r %m%u%c%f"
+zstyle ':vcs_info:*' enable git
+setopt PROMPT_SUBST
+
+#prompt setup
+NEWLINE=$'\n'
+PROMPT='${NEWLINE}'
+PROMPT+='%F{30}%n%f' #username
+# PROMPT+=' at '
+# PROMPT+='%F{3}${${(%):-%m}#Krishbins-}%f' #hostname
+PROMPT+=' in '
+PROMPT+='%F{22}${PWD/#$HOME/~}%f ' #directory
+PROMPT+='${vcs_info_msg_0_} ' #git info
+PROMPT+='${NEWLINE}> '
