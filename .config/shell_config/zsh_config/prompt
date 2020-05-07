@@ -9,9 +9,9 @@ setopt PROMPT_SUBST
 NEWLINE=$'\n'
 PROMPT='${NEWLINE}'
 PROMPT+='%F{30}%n%f' #username
-# PROMPT+=' at '
-# PROMPT+='%F{3}${${(%):-%m}#Krishbins-}%f' #hostname
+PROMPT+=' at '
+PROMPT+='%F{3}${${(%):-%m}#Krishbins-}%f' #hostname
 PROMPT+=' in '
 PROMPT+='%F{22}${PWD/#$HOME/~}%f ' #directory
 PROMPT+='${vcs_info_msg_0_} ' #git info
-PROMPT+='${NEWLINE}> '
+PROMPT+='${NEWLINE}-> '

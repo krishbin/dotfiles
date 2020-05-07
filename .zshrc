@@ -4,7 +4,9 @@ for f in ~/.config/shell_config/zsh_config/*(.); do source "$f"; done
 
 source ~/.config/shell_config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-for file in $(find ~/.config/shell_config/zsh_plugins/ -type f); do source "$file"; done
+source /Users/krispy/.config/shell_config/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+for file in ~/.config/shell_config/zsh_plugins/*(.); do source "$file"; done
 
 
 #flutter path

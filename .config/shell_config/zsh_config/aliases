@@ -1,3 +1,7 @@
 
 alias python=python3
 alias config='/usr/bin/git --git-dir=$HOME/.mycfg/ --work-tree=$HOME'
+alias cask='brew cask'
+
+#git alias
+alias gs='git status'

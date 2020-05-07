@@ -8,7 +8,29 @@ g() {
   fi
 }
 
+cg() {
+  if [[ $# -gt 0 ]]; then
+    config "$@"
+  else
+    config status
+  fi
+}
+
 #makedir and change into it
 function mcd() {
   mkdir -p "$1" && cd "$1";
 }
+
+#enable autocd
+set -o AUTO_CD 
+
+#git commit
+function cgc(){
+	config commit -m "$1"
+}
+
+
+#autojum zsh
+[[ -s /Users/krispy/.autojump/etc/profile.d/autojump.sh ]] && source /Users/krispy/.autojump/etc/profile.d/autojump.sh
+
+autoload -U compinit && compinit -u
