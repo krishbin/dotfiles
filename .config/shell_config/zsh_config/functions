@@ -24,6 +24,9 @@ function mcd() {
 #enable autocd
 set -o AUTO_CD 
 
+#enable autocorrect
+set -o CORRECT
+
 #git commit
 function cgc(){
 	config commit -m "$1"
