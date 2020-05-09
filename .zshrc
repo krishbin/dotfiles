@@ -2,12 +2,15 @@
 #zsh_setup
 for f in ~/.config/shell_config/zsh_config/*(.); do source "$f"; done
 
+fpath=( "$HOME/.zfunctions" $fpath )
+
 source ~/.config/shell_config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 source /Users/krispy/.config/shell_config/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 for file in ~/.config/shell_config/zsh_plugins/*(.); do source "$file"; done
 
+export TERMINAL='alacritty'
 
 #flutter path
 export PATH="$PATH:/Users/krispy/Dev/flutter/bin"
@@ -26,4 +29,5 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
 
