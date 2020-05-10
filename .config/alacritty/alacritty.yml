@@ -100,3 +100,5 @@ key_bindings:
   - { key: W,      mods: Command,            action: Quit             }
   - { key: N,      mods: Command,            action: SpawnNewInstance }
 
+
+
