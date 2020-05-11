@@ -6,7 +6,7 @@ fpath=( "$HOME/.zfunctions" $fpath )
 
 source ~/.config/shell_config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-source /Users/krispy/.config/shell_config/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.config/shell_config/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 for file in ~/.config/shell_config/zsh_plugins/*(.); do source "$file"; done
 
@@ -30,3 +30,5 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

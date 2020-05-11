@@ -6,3 +6,4 @@ alias python=python3
 alias pip=pip3
 alias idle=idle3
 alias mvim=/usr/local/Cellar/macvim/8.2-163/MacVim.app/Contents/bin/mvim
+alias dmod=dark-mode
