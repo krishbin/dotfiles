@@ -1,7 +1,7 @@
 window:
   dimensions:
-    columns: 140 
-    lines: 50 
+    columns: 180 
+    lines: 52 
   padding:
     x: 4 
     y: 0
@@ -9,7 +9,7 @@ window:
 scrolling:
   history: 10000
   multiplier: 3
-background_opacity: 0.65
+background_opacity: 0.95
 
 
 font:
@@ -40,9 +40,6 @@ colors:
   cursor:
     text: '#000000'
     cursor: '#c7c7c7'
-  vi_mode_cursor:
-    text: '#000000'
-    cursor: '#ffffff'
   selection:
     text: '#000000'
     background: '#c7c7c7'
@@ -100,7 +97,25 @@ key_bindings:
   - { key: Q,      mods: Command,            action: Quit             }
   - { key: W,      mods: Command,            action: Quit             }
   - { key: N,      mods: Command,            action: SpawnNewInstance }
-
-
-
-
+  - { key: Key4,      mods: Option|Shift,             chars: "\x02\x25" }
+  - { key: Key5,      mods: Option|Shift,             chars: "\x02\x22" }
+  - { key: W,      mods: Option,             chars: "\x02\x77" }
+  - { key: C,      mods: Option,             chars: "\x02\x63" }
+  - { key: N,      mods: Option,             chars: "\x02\x6e" }
+  - { key: Comma,      mods: Option,             chars: "\x02\x2c" }
+  - { key: Comma,      mods: Option|Shift,             chars: "\x02\x3c" }
+  - { key: X,      mods: Option,             chars: "\x02\x78" }
+  - { key: P,      mods: Option,             chars: "\x02\x70" }
+  - { key: Key0,      mods: Option,             chars: "\x02\x30" }
+  - { key: Key1,      mods: Option,             chars: "\x02\x31" }
+  - { key: Key2,      mods: Option,             chars: "\x02\x32" }
+  - { key: Key3,      mods: Option,             chars: "\x02\x33" }
+  - { key: Key4,      mods: Option,             chars: "\x02\x34" }
+  - { key: Key5,      mods: Option,             chars: "\x02\x35" }
+  - { key: Key6,      mods: Option,             chars: "\x02\x36" }
+  - { key: Key7,      mods: Option,             chars: "\x02\x37" }
+  - { key: Key8,      mods: Option,             chars: "\x02\x38" }
+  - { key: Key9,      mods: Option,             chars: "\x02\x39" }
+  - { key: RBracket,      mods: Option,             chars: "\x02\x5b" }
+  - { key: LBracket,      mods: Option,             chars: "\x02\x5d" }
+  - { key: Apostrophe,      mods: Option|Shift,             chars: "\x02\x22" }

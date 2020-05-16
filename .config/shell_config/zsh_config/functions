@@ -37,3 +37,8 @@ function cgc(){
 [[ -s /Users/krispy/.autojump/etc/profile.d/autojump.sh ]] && source /Users/krispy/.autojump/etc/profile.d/autojump.sh
 
 autoload -U compinit && compinit -u
+
+function ytdl-pl(){
+	youtube-dl -o '%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s' "$1" 
+}
+
