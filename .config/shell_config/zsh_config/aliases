@@ -1,11 +1,9 @@
-
 alias config='/usr/bin/git --git-dir=$HOME/.mycfg/ --work-tree=$HOME'
 alias cask='brew cask'
 alias reset='cd ~;source ~/.zshrc;clear'
-alias python=python3
-alias pip=pip3
-alias idle=idle3
-alias mvim=/usr/local/Cellar/macvim/8.2-163/MacVim.app/Contents/bin/mvim
 alias dmod=dark-mode
-alias vim_short='vim .vim_shortcuts'
-alias rem=reminders
+alias vim=nvim
+alias vshort='vim ~/workshop/notes/nvim'
+
+alias tmun='tmux new-session -t'
+alias mdb='mongod -f /usr/local/etc/mongod.conf'

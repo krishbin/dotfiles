@@ -13,22 +13,22 @@ for file in ~/.config/shell_config/zsh_plugins/*(.); do source "$file"; done
 export TERMINAL='alacritty'
 
 #flutter path
-export PATH="$PATH:/Users/krispy/Dev/flutter/bin"
+export PATH="$PATH:/usr/local/flutter/bin"
+export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/krispy/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/usr/local/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/Users/krispy/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/krispy/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/usr/local/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/usr/local/anaconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/Users/krispy/anaconda3/bin:$PATH"
+        export PATH="/usr/local/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
