@@ -14,7 +14,6 @@ syntax enable
 syntax on "syntax highlighting
 set encoding=utf-8
 set numberwidth=4
-
 "prgram specific
 set tabstop=4
 set softtabstop=4
@@ -29,13 +28,7 @@ set path+=**
 filetype indent on
 filetype plugin on
 
-source $HOME/.config/nvim/coc.vim
-
-let g:airline#extensions#coc#enabled = 1
-let airline#extensions#coc#error_symbol = 'E:'
-let airline#extensions#coc#warning_symbol = 'W:'
-let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
-let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
+let g:python3_host_prog="/usr/local/bin/python3"
 
 if has('nvim')
     tnoremap <C-j> <C-\><C-n>
@@ -50,7 +43,7 @@ autocmd VimResized * :wincmd =
 let g:netrw_banner=0
 let g:netrw_altv=1
 let g:netrw_liststyle=3
-let g:netrw_browse_split = 4
+let g:netrw_browse_split = 0
 let g:netrw_winsize=25
 
 let mapleader = "\<Space>"
@@ -59,8 +52,6 @@ nnoremap j gj
 nnoremap k gk
 nnoremap <leader>z :wincmd _<cr>:wincmd \|<cr>
 nnoremap <leader>Z :wincmd =<cr>
-nnoremap <silent><leader>rr :!tmux send-keys -t 2 "python emaildb.py" C-m<cr>
-nnoremap <silent><leader>rc :!tmux send-keys -t 2 "clear" C-m<cr>
 nmap 0 ^
 nmap <leader>e :Vexplore<cr>
 nmap <leader>o :Explore<cr>
@@ -102,7 +93,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dart-lang/dart-vim-plugin'
 call plug#end()
 

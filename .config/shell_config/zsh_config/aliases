@@ -7,3 +7,4 @@ alias vshort='vim ~/workshop/notes/nvim'
 
 alias tmun='tmux new-session -t'
 alias mdb='mongod -f /usr/local/etc/mongod.conf'
+alias python=python3
