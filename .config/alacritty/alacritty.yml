@@ -9,8 +9,7 @@ window:
 scrolling:
   history: 10000
   multiplier: 3
-background_opacity: 1.00
-
+background_opacity: 0.95
 
 font:
   normal:
@@ -25,7 +24,7 @@ font:
 #  bold_italic:
 #    family: Fira Code
 #    style: Bold Italic
-  size: 11.6
+  size: 11.8
   offset:
     x: 0
     y: 0
@@ -35,7 +34,7 @@ font:
 
 colors:
   primary:
-    background: '#08141e'
+    background: '#2D3741'
     foreground: '#c7c7c7'
   cursor:
     text: '#000000'
@@ -43,24 +42,24 @@ colors:
   selection:
     text: '#000000'
     background: '#c7c7c7'
-  normal:
-    black:   '0x1d1f21'
-    red:     '0xcc6666'
-    green:   '0xb5bd68'
-    yellow:  '0xe6c547'
-    blue:    '0x81a2be'
-    magenta: '0xb294bb'
-    cyan:    '0x70c0ba'
-    white:   '0x373b41'
-  bright:
-    black:   '0x666666'
-    red:     '0xff3334'
-    green:   '0x9ec400'
-    yellow:  '0xf0c674'
-    blue:    '0x81a2be'
-    magenta: '0xb77ee0'
-    cyan:    '0x54ced6'
-    white:   '0x282a2e'
+  # normal:
+  #   black:   '0x1d1f21'
+  #   red:     '0xcc6666'
+  #   green:   '0xb5bd68'
+  #   yellow:  '0xe6c547'
+  #   blue:    '0x81a2be'
+  #   magenta: '0xb294bb'
+  #   cyan:    '0x70c0ba'
+  #   white:   '0x373b41'
+  # bright:
+  #   black:   '0x666666'
+  #   red:     '0xff3334'
+  #   green:   '0x9ec400'
+  #   yellow:  '0xf0c674'
+  #   blue:    '0x81a2be'
+  #   magenta: '0xb77ee0'
+  #   cyan:    '0x54ced6'
+  #   white:   '0x282a2e'
 
 visual_bell:
   animation: EaseOutExpo
@@ -102,3 +101,7 @@ key_bindings:
   - { key: D,      mods: Shift|Command,            action: ScrollPageDown }
   - { key: E,      mods: Shift|Command,            action: ScrollLineDown }
   - { key: Y,      mods: Shift|Command,            action: ScrollLineUp }
+  - { key: H,      mods: Shift|Control,     chars: "\x1b\x5b\x31\x3b\x35\x44"}
+  - { key: J,      mods: Shift|Control,     chars: "\x1b\x5b\x31\x3b\x35\x42"}
+  - { key: K,      mods: Shift|Control,     chars: "\x1b\x5b\x31\x3b\x35\x41"}
+  - { key: L,      mods: Shift|Control,     chars: "\x1b\x5b\x31\x3b\x35\x43"}
