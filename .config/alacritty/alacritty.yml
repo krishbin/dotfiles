@@ -9,7 +9,7 @@ window:
 scrolling:
   history: 10000
   multiplier: 3
-background_opacity: 0.95
+background_opacity: 1.00
 
 font:
   normal:
@@ -17,14 +17,14 @@ font:
     style: Light
   bold:
     family: Fira Code
-    style: Retina
+    style: Medium
   italic:
     family: Fira Code
     style: Italic
 #  bold_italic:
 #    family: Fira Code
 #    style: Bold Italic
-  size: 11.8
+  size: 12
   offset:
     x: 0
     y: 0
@@ -34,7 +34,7 @@ font:
 
 colors:
   primary:
-    background: '#2D3741'
+    background: '#272727'
     foreground: '#c7c7c7'
   cursor:
     text: '#000000'

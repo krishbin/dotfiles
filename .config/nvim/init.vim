@@ -143,18 +143,9 @@ nnoremap <leader>h <C-w>h
 nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
 nnoremap <leader>l <C-w>l
-"keep selecting the text after indenting in visual mode
-vnoremap < <gv
-vnoremap > >gv
 "indent all lines of the file
 nnoremap <leader>ia gg=G<C-o>
-"operator to change on next.previous structures
-onoremap in( :<C-u>normal! f(vi(<cr>
-onoremap in" :<C-u>normal! f"vi"<cr>
-onoremap in' :<C-u>normal! f'vi'<cr>
-onoremap ip( :<C-u>normal! F)vi(<cr>
-onoremap ip" :<C-u>normal! F"vi"<cr>
-onoremap ip' :<C-u>normal! F'vi'<cr>
+"keep selecting the text after indenting in visual mode
 "clear highlighting
 nnoremap <silent><leader>ch :noh<CR>
 "treat a long line like multiline if it appears in two line
@@ -168,6 +159,8 @@ nnoremap <leader>tc :<C-u>tabclose<cr>
 nnoremap <leader>z :wincmd _<cr>:wincmd \|<cr>
 "minimize the maximized window
 nnoremap <leader>Z :wincmd =<cr>
+"FZF
+nnoremap <C-p> :Files<cr>
 "left explorer
 nmap <leader>e :Lexplore<cr>
 "open a file explorer
@@ -185,6 +178,18 @@ nmap <leader>da gg0VG"*d
 nmap <leader>vi :tabe $MYVIMRC<cr>
 "source the init.vim file
 nmap <silent><leader>so :source $MYVIMRC<cr>
+vnoremap < <gv
+vnoremap > >gv
+"move a visual block up or down a line
+vnoremap <silent><leader>k :move-2<CR>gv=gv
+vnoremap <silent><leader>j :move'>+<CR>gv=gv
+"operator to change on next.previous structures
+onoremap in( :<C-u>normal! f(vi(<cr>
+onoremap in" :<C-u>normal! f"vi"<cr>
+onoremap in' :<C-u>normal! f'vi'<cr>
+onoremap ip( :<C-u>normal! F)vi(<cr>
+onoremap ip" :<C-u>normal! F"vi"<cr>
+onoremap ip' :<C-u>normal! F'vi'<cr>
 "Ctrl-j acts a escape
 imap <C-j> <Esc>
 nmap <C-j> <Esc>
@@ -195,9 +200,6 @@ map <leader>sv :vsplit<cr><C-w>w
 "Ctrl-s writes to the file
 nmap <C-s> :w<cr>
 imap <C-s> <Esc>:w<cr>
-"move a visual block up or down a line
-vnoremap <silent><leader>k :move-2<CR>gv=gv
-vnoremap <silent><leader>j :move'>+<CR>gv=gv
 
 "remove the mapping from the arrow keys
 map <Up> <Nop>
@@ -241,7 +243,7 @@ let g:airline_right_alt_sep = ''
 """""""""""""""
 "YouCompleteMe"
 """""""""""""""
-"let g:ycm_clangd_binary_path = '/usr/local/opt/llvm/bin/clangd'
+" let g:ycm_clangd_binary_path = '/usr/local/opt/llvm/bin/clangd'
 " let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
 " let g:ycm_min_num_of_chars_for_completion = 2
 " let g:ycm_autoclose_preview_window_after_completion = 1
