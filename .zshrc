@@ -4,13 +4,16 @@ for f in ~/.config/shell_config/zsh_config/*(.); do source "$f"; done
 
 fpath=( "$HOME/.zfunctions" $fpath )
 
-source ~/.config/shell_config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-source ~/.config/shell_config/zsh-autosuggestions/zsh-autosuggestions.zsh
-
 for file in ~/.config/shell_config/zsh_plugins/*(.); do source "$file"; done
 
 export TERMINAL='alacritty'
+
+[[ -s /Users/krispy/.autojump/etc/profile.d/autojump.sh ]] && source /Users/krispy/.autojump/etc/profile.d/autojump.sh
+
+source ~/.config/shell_config/zsh-autosuggestions/zsh-autosuggestions.zsh
+autoload -U compinit && compinit -u
+compinit
+
 
 #flutter path
 export PATH="$PATH:/usr/local/flutter/bin"
