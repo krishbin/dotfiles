@@ -8,7 +8,7 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 
 if [[ "$(tput colors)" == "256" ]]; then
     ZSH_HIGHLIGHT_STYLES[default]=none
-    ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=124
+    ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=9
     ZSH_HIGHLIGHT_STYLES[reserved-word]=fg=037,bold #,standout
     ZSH_HIGHLIGHT_STYLES[alias]=fg=064,bold
     ZSH_HIGHLIGHT_STYLES[builtin]=fg=064,bold

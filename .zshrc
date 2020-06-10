@@ -11,9 +11,6 @@ export TERMINAL='alacritty'
 [[ -s /Users/krispy/.autojump/etc/profile.d/autojump.sh ]] && source /Users/krispy/.autojump/etc/profile.d/autojump.sh
 
 source ~/.config/shell_config/zsh-autosuggestions/zsh-autosuggestions.zsh
-autoload -U compinit && compinit -u
-compinit
-
 
 #flutter path
 export PATH="$PATH:/usr/local/flutter/bin"

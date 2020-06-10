@@ -4,7 +4,7 @@
 "vim-plug"{{{
 call plug#begin('~/.config/nvim/plugged')
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'flazz/vim-colorschemes'
+" Plug 'flazz/vim-colorschemes'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
@@ -13,6 +13,7 @@ Plug 'dart-lang/dart-vim-plugin'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'pangloss/vim-javascript'
+Plug 'morhetz/gruvbox'
 call plug#end()
 "}}}
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -20,10 +21,11 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "default"{{{
 " General configuration
+set nu
 set rnu                                  "line number
 set hidden                               "allow buffer to change w/o saving
 set lazyredraw                           "dont execute while running macros
-set termguicolors
+" set termguicolors
 set history=1000                         "remember last thousand commands
 set showmatch                            "show matching bracket
 set hlsearch                             "highlight the search results
@@ -53,7 +55,7 @@ filetype indent on
 filetype plugin on
 
 if has("nvim")
-set inccommand=nosplit                   "live find a replace
+set inccommand=nosplit                   "live find and replace
 endif
 
 "}}}
@@ -216,8 +218,10 @@ map <Right> <Nop>
 "built into neovim"
 """""""""""""""""""
 colorscheme gruvbox
+" let g:gruvbox_contrast_dark="soft"
 set background=dark
 let g:python3_host_prog = "/usr/local/bin/python3"
+let g:gruvbox_color_column="bg3"
 let g:netrw_banner=0
 let g:netrw_altv=1
 let g:netrw_liststyle=3
