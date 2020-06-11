@@ -30,6 +30,8 @@ set history=1000                         "remember last thousand commands
 set showmatch                            "show matching bracket
 set hlsearch                             "highlight the search results
 set incsearch                            "highlight search results as you type
+set splitbelow
+set splitright
 set backspace=indent,eol,start
 set ruler
 set colorcolumn=80
@@ -85,7 +87,6 @@ command! Wq x
 autocmd Filetype help nmap <silent><buffer> q :q<CR>
 "quit netrw with an additional leader key
 autocmd Filetype netrw nmap <silent><buffer> <leader>q :q<CR>
-
 """""""""""""""""""
 "markdown specific"
 """""""""""""""""""
@@ -96,15 +97,20 @@ autocmd Filetype markdown onoremap ih :<c-u>execute "normal! \
 "python specific      "
 """""""""""""""""""""""
 "easily write statements
-autocmd Filetype python :iabbrev <buffer> iff if:<left>
-autocmd Filetype python :iabbrev <buffer> forr for:<left>
-autocmd Filetype python :iabbrev <buffer> classs class:<left>
-autocmd Filetype python :iabbrev <buffer> deff def:<left>
-"get into the statement body after it is complete
-autocmd Filetype python inoremap <C-b> <esc>A<cr>
-"automatically format current file according to pep8 standard, python autopep8
-"required
-autocmd Filetype python nnoremap <leader><C-s> :%!autopep8 %<cr>:w<cr>
+augroup python_file
+    autocmd Filetype python set tabstop=4
+    autocmd Filetype python set softtabstop=4
+    autocmd Filetype python set shiftwidth=4
+    autocmd Filetype python :iabbrev <buffer> iff if:<left>
+    autocmd Filetype python :iabbrev <buffer> forr for:<left>
+    autocmd Filetype python :iabbrev <buffer> classs class:<left>
+    autocmd Filetype python :iabbrev <buffer> deff def:<left>
+    "get into the statement body after it is complete
+    autocmd Filetype python inoremap <C-b> <esc>A<cr>
+    "automatically format current file according to pep8 standard, python autopep8
+    "required
+    autocmd Filetype python nnoremap <leader><C-s> :%!autopep8 %<cr>:w<cr>
+augroup END
 
 
 """""""""""""""""""""""""""

@@ -48,39 +48,6 @@ function cpp(){
 #autojum zsh
 
 #tmux
-function tmul(){
-    case $1 in
-        work1)
-            tmux selectp -t 0
-            tmux send-keys "vim" C-m
-            tmux splitw -v -p 30
-            tmux selectp -t 1
-            tmux send-keys "clear" C-m
-            tmux splitw -h -p 66
-            tmux selectp -t 2
-            tmux send-keys "clear" C-m
-            tmux splitw -h -p 50
-            tmux selectp -t 0
-            ;;
-        work2)
-            tmux selectp -t 0
-            tmux send-keys "vim" C-m
-            tmux splitw -h -p 30
-            tmux selectp -t 1
-            tmux splitw -v -p 65
-            tmux selectp -t 0
-            ;;
-        note)
-            tmux send-keys "cd ~/Workshop/Notes/" C-m
-            tmux send-keys "vim" C-m
-            tmux send-keys " o"
-            ;;
-        *)
-            echo "-'- = work1 \n -| = work2 \n please pass that as a second argument"
-            ;;
-    esac
-
-}
 
 function nv(){
     case $1 in
