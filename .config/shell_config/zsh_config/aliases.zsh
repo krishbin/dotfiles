@@ -6,3 +6,8 @@ alias vim=nvim
 alias vshort='vim ~/workshop/notes/nvim'
 alias tmun='tmux new-session -t'
 alias mdb='mongod -f /usr/local/etc/mongod.conf'
+alias glog='git log --all --decorate --graph'
+alias glogo='git log --all --decorate --all --oneline'
+alias cglog='cg log --all --decorate --graph'
+alias cglogo='cg log --all --decorate --all --oneline'
+alias grep='grep --color=auto'

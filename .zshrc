@@ -1,4 +1,3 @@
-
 #zsh_setup
 for f in ~/.config/shell_config/zsh_config/*(.); do source "$f"; done
 
@@ -33,3 +32,4 @@ unset __conda_setup
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 export FZF_DEFAULT_COMMAND="rg --files --hidden"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PYTHONSTARTUP=~/.pythonrc

@@ -1,19 +1,24 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           plug                                    "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "vim-plug"{{{
 call plug#begin('~/.config/nvim/plugged')
 Plug 'bronson/vim-trailing-whitespace'
 " Plug 'flazz/vim-colorschemes'
+
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
+Plug 'machakann/vim-highlightedyank'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'pangloss/vim-javascript'
 Plug 'morhetz/gruvbox'
+Plug 'neovim/nvim-lsp'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 "}}}
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -23,6 +28,7 @@ call plug#end()
 " General configuration
 set nu
 set rnu                                  "line number
+set guifont=JetBrains\ Mono:h12
 set hidden                               "allow buffer to change w/o saving
 set lazyredraw                           "dont execute while running macros
 " set termguicolors
@@ -47,8 +53,9 @@ set shiftwidth=4
 set expandtab
 set autoindent
 set autochdir                            "autochange directory on the basis of what file you are editing
-set clipboard^=unnamed                   "add system clipboard support
-set clipboard^=unnamedplus
+set undodir=~/.config/nvim/vimdid
+" set clipboard^=unnamed                   "add system clipboard support
+" set clipboard^=unnamedplus
 set wildmenu                             "command line completion
 set cursorline
 set path+=**
@@ -69,8 +76,6 @@ endif
 if has('nvim')
     "normal mode in terminal
     tnoremap <C-n> <C-\><C-n>
-    "escape in terminal
-    tnoremap <C-j> <esc>
 endif
 
 "make it easier to edit and quit files
@@ -83,8 +88,14 @@ command! Wq wq
 ":x also writes and quits
 command! Wq x
 
+autocmd Filetype dart nnoremap <leader>rr :CocCommand flutter.run<cr>
+autocmd Filetype dart nnoremap <leader>re :CocCommand flutter.dev.hotReload<cr>
+autocmd Filetype dart nnoremap <leader>rs :CocCommand flutter.dev.hotRestart<cr>
+autocmd Filetype dart nnoremap <leader>pg :CocCommand flutter.pub.get<cr>
+
 "quit help file like man pages
 autocmd Filetype help nmap <silent><buffer> q :q<CR>
+autocmd Filetype help wincmd K
 "quit netrw with an additional leader key
 autocmd Filetype netrw nmap <silent><buffer> <leader>q :q<CR>
 """""""""""""""""""
@@ -97,20 +108,16 @@ autocmd Filetype markdown onoremap ih :<c-u>execute "normal! \
 "python specific      "
 """""""""""""""""""""""
 "easily write statements
-augroup python_file
-    autocmd Filetype python set tabstop=4
-    autocmd Filetype python set softtabstop=4
-    autocmd Filetype python set shiftwidth=4
-    autocmd Filetype python :iabbrev <buffer> iff if:<left>
-    autocmd Filetype python :iabbrev <buffer> forr for:<left>
-    autocmd Filetype python :iabbrev <buffer> classs class:<left>
-    autocmd Filetype python :iabbrev <buffer> deff def:<left>
-    "get into the statement body after it is complete
-    autocmd Filetype python inoremap <C-b> <esc>A<cr>
-    "automatically format current file according to pep8 standard, python autopep8
-    "required
-    autocmd Filetype python nnoremap <leader><C-s> :%!autopep8 %<cr>:w<cr>
-augroup END
+autocmd Filetype python :inoreabbrev <buffer> iff if:<left>
+autocmd Filetype python :inoreabbrev <buffer> eliff elif:<left>
+autocmd Filetype python :inoreabbrev <buffer> forr for:<left>
+autocmd Filetype python :inoreabbrev <buffer> classs class:<left>
+autocmd Filetype python :inoreabbrev <buffer> deff def:<left>
+"get into the statement body after it is complete
+autocmd Filetype python inoremap <C-b> <esc>A<cr>
+"automatically format current file according to pep8 standard, python autopep8
+"required
+autocmd Filetype python nnoremap <leader><C-s> :w!<cr>:%!autopep8 %<cr>:w<cr>:%!isort -d %<cr>:w<cr>
 
 
 """""""""""""""""""""""""""
@@ -118,15 +125,15 @@ augroup END
 """""""""""""""""""""""""""
 "
 "easily write statements
-autocmd Filetype javascript,cpp,c :iabbrev <buffer> iff if ()<left>
-autocmd Filetype javascript,cpp,c :iabbrev <buffer> forr for ()<left>
+autocmd Filetype javascript,cpp,c :inoreabbrev <buffer> iff if ()<left>
+autocmd Filetype javascript,cpp,c :inoreabbrev <buffer> forr for ()<left>
 "get inside statement body with curly braces already defined
 autocmd Filetype javascript,cpp,c inoremap <C-b> <esc>A{<esc>o<esc>o}<esc>ki<tab>
 
 "format c and cpp files
 autocmd Filetype c,cpp nnoremap <leader><C-s> :%!clang-format %<cr>:w<cr>
 "make json pretty
-autocmd Filetype json nnoremap <leader><C-s> :%!python -m json.tool %<cr>:w<cr>
+autocmd Filetype json nnoremap <leader><C-s> :w!<cr>:%!python -m json.tool %<cr>:w<cr>
 
 
 """"""""
@@ -136,13 +143,12 @@ autocmd Filetype json nnoremap <leader><C-s> :%!python -m json.tool %<cr>:w<cr>
 "easily switch between buffer
 nnoremap <silent>]b :bn<cr>
 nnoremap <silent>[b :bp<cr>
-"quit buffer
-nnoremap <silent><leader>bq :bp<cr>
-"write file
-nnoremap <leader>w :w!<cr>
+nnoremap <silent><C-q> :wq<cr>
 
 "insert a html bare snippet
-noremap ,htm :-1r $HOME/.config/nvim/snippets/base.html<cr>5j2f<i
+nnoremap ,htm :-1r $HOME/.config/nvim/snippets/base.html<cr>5j2f<i
+
+nnoremap ,py :-1r $HOME/.config/nvim/snippets/main.py<cr>o
 
 "make space as the leader key
 let mapleader = "\<Space>"
@@ -169,6 +175,7 @@ nnoremap <leader>z :wincmd _<cr>:wincmd \|<cr>
 nnoremap <leader>Z :wincmd =<cr>
 "FZF
 nnoremap <C-p> :Files<cr>
+nnoremap <leader><C-p> :Buffers<cr>
 "left explorer
 nmap <leader>e :Lexplore<cr>
 "open a file explorer
@@ -182,6 +189,8 @@ nmap <leader>rl <C-w>5<
 nmap <leader>ya gg0VG"*y
 "delete all content of the file
 nmap <leader>da gg0VG"*d
+nmap <leader>dj m`jdd``
+nmap <leader>dk m`kdd``
 "edit init.vim in a new tab
 nmap <leader>vi :tabe $MYVIMRC<cr>
 "source the init.vim file
@@ -198,22 +207,23 @@ onoremap in' :<C-u>normal! f'vi'<cr>
 onoremap ip( :<C-u>normal! F)vi(<cr>
 onoremap ip" :<C-u>normal! F"vi"<cr>
 onoremap ip' :<C-u>normal! F'vi'<cr>
-"Ctrl-j acts a escape
-imap <C-j> <Esc>
-nmap <C-j> <Esc>
-vmap <C-j> <Esc>
 "split vertical or horizontal and move cursor to the new split
-map <leader>sh :split<cr><C-w>w
-map <leader>sv :vsplit<cr><C-w>w
+map <leader>sh :split<cr>
+map <leader>sv :vsplit<cr>
 "Ctrl-s writes to the file
 nmap <C-s> :w<cr>
 imap <C-s> <Esc>:w<cr>
-
+nnoremap <leader>aj m`o<esc>``
+nnoremap <leader>ak m`O<esc>``
 "remove the mapping from the arrow keys
-map <Up> <Nop>
-map <Down> <Nop>
-map <Left> <Nop>
-map <Right> <Nop>
+nnoremap <Up> <Nop>
+nnoremap <Down> <Nop>
+nnoremap <Left> <Nop>
+nnoremap <Right> <Nop>
+inoremap <Up> <Nop>
+inoremap <Down> <Nop>
+inoremap <Left> <Nop>
+inoremap <Right> <Nop>
 "}}}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -221,6 +231,7 @@ map <Right> <Nop>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "{{{
 """""""""""""""""""
+source $HOME/.config/nvim/coc.vim
 "built into neovim"
 """""""""""""""""""
 colorscheme gruvbox

@@ -134,7 +134,3 @@ key_bindings:
   - { key: D,      mods: Shift|Command,            action: ScrollPageDown }
   - { key: E,      mods: Shift|Command,            action: ScrollLineDown }
   - { key: Y,      mods: Shift|Command,            action: ScrollLineUp }
-  - { key: H,      mods: Shift|Control,     chars: "\x1b\x5b\x31\x3b\x35\x44"}
-  - { key: J,      mods: Shift|Control,     chars: "\x1b\x5b\x31\x3b\x35\x42"}
-  - { key: K,      mods: Shift|Control,     chars: "\x1b\x5b\x31\x3b\x35\x41"}
-  - { key: L,      mods: Shift|Control,     chars: "\x1b\x5b\x31\x3b\x35\x43"}
