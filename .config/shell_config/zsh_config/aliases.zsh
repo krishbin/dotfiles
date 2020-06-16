@@ -11,3 +11,6 @@ alias glogo='git log --all --decorate --all --oneline'
 alias cglog='cg log --all --decorate --graph'
 alias cglogo='cg log --all --decorate --all --oneline'
 alias grep='grep --color=auto'
+alias ls=exa
+alias ll='exa -l'
+alias l='/bin/ls'

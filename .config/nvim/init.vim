@@ -8,9 +8,8 @@ Plug 'bronson/vim-trailing-whitespace'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'vim-airline/vim-airline'
 Plug 'machakann/vim-highlightedyank'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'tpope/vim-surround'
@@ -73,6 +72,9 @@ endif
 "                           maping                                  "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "{{{
+map Q <nop>
+nnoremap <silent> Q :cclose<CR>:lclose<CR>
+nnoremap <leader>W :wq<cr>
 if has('nvim')
     "normal mode in terminal
     tnoremap <C-n> <C-\><C-n>
@@ -237,6 +239,70 @@ source $HOME/.config/nvim/coc.vim
 colorscheme gruvbox
 " let g:gruvbox_contrast_dark="soft"
 set background=dark
+let g:highlightedyank_highlight_duration = 200
+autocmd BufNewFile,BufRead /private/* set noautoindent filetype=mail wm=0 tw=78 nonumber digraph nolist nopaste
+
+function! CocCurrentFunction()
+    return get(b:, 'coc_current_function', '')
+endfunction
+
+function! StatusDiagnosticError() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info) | return ''| endif
+  let msgs = []
+  if get(info, 'error', 0)
+    call add(msgs, 'E:' . info['error'])
+  endif
+  return join(msgs, ' ')
+endfunction
+
+function! StatusDiagnosticWarning() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info) | return ''| endif
+  let msgs = []
+  if get(info, 'warning', 0)
+    call add(msgs, 'W:' . info['warning'])
+  endif
+  return join(msgs, ' ')
+endfunction
+
+function! GetPythonEnv() abort
+    let msg = get(g:, 'coc_status', '')
+    if &ft=='python'
+        return strpart(msg, 21)
+    else
+        return msg
+    endif
+endfunction
+
+let g:lightline = {
+            \ 'colorscheme': 'deus',
+            \ 'active': {
+            \   'left': [ [ 'mode', 'paste' ],
+            \             [ 'gitbranch' ],[ 'readonly', 'absolutepath', 'modified' ] ],
+		    \ 'right': [ ['cocstatuserror','cocstatuswarn', 'lineinfo'],
+		    \            [ 'percent' ],
+		    \            [ 'filetype','pyenv', 'fileencoding'] ] },
+            \ 'component_function': {
+            \   'gitbranch': 'FugitiveHead',
+            \   'pyenv': 'GetPythonEnv'
+            \ },
+            \ 'component_expand': {
+            \   'cocstatuserror': 'StatusDiagnosticError',
+            \   'cocstatuswarn': 'StatusDiagnosticWarning',
+            \ },
+            \ 'component_type': {
+            \   'cocstatuserror': 'error',
+            \   'cocstatuswarn': 'warn',
+            \ }
+            \ }
+
+let g:lightline.enable = {
+            \ 'statusline': 1,
+            \ 'tabline': 1
+            \ }
+
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 let g:python3_host_prog = "/usr/local/bin/python3"
 let g:gruvbox_color_column="bg3"
 let g:netrw_banner=0
@@ -248,11 +314,11 @@ let g:netrw_winsize=15
 """""""""
 "airline"
 """""""""
-let g:airline_theme='onedark'
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
+" let g:airline_theme='onedark'
+" let g:airline_left_sep = ''
+" let g:airline_left_alt_sep = ''
+" let g:airline_right_sep = ''
+" let g:airline_right_alt_sep = ''
 " let g:airline#extensions#tabline#enabled = 1
 " let g:airline#extensions#tabline#show_tabs = 0
 " let g:airline#extensions#tabline#show_tab_count = 0
