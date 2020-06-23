@@ -1,0 +1,11 @@
+{
+    "python.venvFolders":["/usr/local/miniconda3/envs/"],
+    "python.jediPath": "/usr/local/lib/python3.7/site-packages/",
+    "suggest.maxCompleteItemCount": 30,
+    "diagnostic.errorSign": "🛑",
+    "diagnostic.warningSign": "⚠",
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Path": "flake8",
+    "python.linting.flake8Args": []
+}

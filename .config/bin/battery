@@ -1,0 +1,18 @@
+#!/bin/zsh
+
+trim(){ echo "$1"}
+status_bat="$(trim `pmset -g batt | grep -Po "AC" | cut -f 1 -d:`)"
+charge=$(pmset -g batt | grep -Po "\d+%"| grep -Po "\d+")
+if [[ $charge -gt 50 || "$status_bat" = "AC" ]];then
+    out_value="#[fg=colour72]"
+elif [[ charge -gt 25 ]];then
+    out_value="#[fg=colour178]"
+else
+    out_value= "❗️#[fg=colour88]"
+fi;
+
+if [[ "$status_bat" = "AC" ]];then
+    echo "$out_value$charge%🔌"
+else
+    echo "$out_value$charge%"
+fi;

@@ -24,7 +24,7 @@ font:
 #  bold_italic:
 #    family: JetBrains Mono
 #    style: Bold Italic
-  size: 12
+  size: 11.0
   offset:
     x: 0
     y: 0
@@ -129,8 +129,8 @@ key_bindings:
   - { key: Q,      mods: Command,            action: Quit             }
   - { key: W,      mods: Command,            action: Quit             }
   - { key: N,      mods: Command,            action: SpawnNewInstance }
-  - { key: F,      mods: Shift|Command,            action: ToggleFullscreen }
-  - { key: U,      mods: Shift|Command,            action: ScrollPageUp }
-  - { key: D,      mods: Shift|Command,            action: ScrollPageDown }
-  - { key: E,      mods: Shift|Command,            action: ScrollLineDown }
-  - { key: Y,      mods: Shift|Command,            action: ScrollLineUp }
+  - { key: F,      mods: Control|Option,            action: ToggleFullscreen }
+  - { key: U,      mods: Control|Option,            action: ScrollPageUp }
+  - { key: D,      mods: Control|Option,            action: ScrollPageDown }
+  - { key: E,      mods: Control|Option,            action: ScrollLineDown }
+  - { key: Y,      mods: Control|Option,            action: ScrollLineUp }

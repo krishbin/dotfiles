@@ -5,7 +5,7 @@
 call plug#begin('~/.config/nvim/plugged')
 Plug 'bronson/vim-trailing-whitespace'
 " Plug 'flazz/vim-colorschemes'
-
+Plug 'SirVer/ultisnips'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'machakann/vim-highlightedyank'
@@ -103,9 +103,7 @@ autocmd Filetype netrw nmap <silent><buffer> <leader>q :q<CR>
 """""""""""""""""""
 "markdown specific"
 """""""""""""""""""
-autocmd Filetype markdown onoremap ih :<c-u>execute "normal! \
-            \?^==\\+$\r:nohlsearch\rkvg_"<cr>
-
+" autocmd Filetype markdown onoremap ih :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rkvg_"<cr>
 """""""""""""""""""""""
 "python specific      "
 """""""""""""""""""""""
@@ -129,6 +127,12 @@ autocmd Filetype python nnoremap <leader><C-s> :w!<cr>:%!autopep8 %<cr>:w<cr>:%!
 "easily write statements
 autocmd Filetype javascript,cpp,c :inoreabbrev <buffer> iff if ()<left>
 autocmd Filetype javascript,cpp,c :inoreabbrev <buffer> forr for ()<left>
+autocmd Filetype javascript,cpp,c :inoreabbrev <buffer> clog console.log()<left>
+autocmd Filetype javascript,cpp,c :inoreabbrev <buffer> elseif else if ()<left>
+autocmd Filetype javascript :inoreabbrev <buffer> func function
+autocmd Filetype javascript inoremap <C-n> ()<left>
+autocmd Filetype javascript nnoremap <leader>rr :silent !tmux send-keys -t 1 "deno"" ""run"" "% "C-m"<cr>
+autocmd Filetype javascript nnoremap <leader>cl :silent !tmux send-keys -t 1 "C-l"<cr>
 "get inside statement body with curly braces already defined
 autocmd Filetype javascript,cpp,c inoremap <C-b> <esc>A{<esc>o<esc>o}<esc>ki<tab>
 

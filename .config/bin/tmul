@@ -1,0 +1,47 @@
+#!/bin/zsh
+if [[ -z "$TMUX" ]]; then
+    echo "You are not in a Tmux Session"
+else
+    case $1 in
+        (h3) tmux selectp -t 0
+            tmux splitw -v -p 25
+            tmux selectp -t 1
+            tmux splitw -h -p 50
+            tmux selectp -t 2
+            tmux selectp -t 0
+            tmux send-keys -t 0 "vim" C-m
+            ;;
+        (v3) tmux selectp -t 0
+            tmux send-keys "vim" C-m
+            tmux splitw -h -p 30
+            tmux selectp -t 1
+            tmux splitw -v -p 65
+            tmux selectp -t 0
+            ;;
+        (h4) tmux selectp -t 0
+            tmux splitw -v -p 30
+            tmux selectp -t 1
+            tmux splitw -h -p 66
+            tmux selectp -t 2
+            tmux splitw -h -p 50
+            tmux selectp -t 3
+            tmux selectp -t 0
+            tmux send-keys -t 0 "vim" C-m
+            ;;
+        (v2) tmux selectp -t 0
+            tmux send-keys "vim" C-m
+            tmux splitw -h -p 30
+            tmux selectp -t 1
+            tmux selectp -t 0
+            ;;
+        (*)
+            echo "
+     _____           _____          _____          _____
+    |     |         |   |_|        |     |        |   | |
+    |_____|  = h3   |   | | = v3   |_____| = h4   |   | | = v2
+    |__|__|         |___|_|        |_|_|_|        |___|_|
+
+                    Pass any as an option!"
+             ;;
+    esac
+fi

@@ -1,0 +1,25 @@
+{
+  "commands": {
+    "%2FUsers%2Fkrispy%2FWorkshop%2Fpython%2Fweb_dev%2Fkrish_project": [
+      "python.se",
+      "inter"
+    ],
+    "%2FUsers%2Fkrispy%2FWorkshop%2Fflutter%2Fintegration%2Flib": [
+      "flutter.pu",
+      "flutter.dev.quit"
+    ],
+    "%2FUsers%2Fkrispy%2FWorkshop%2Fpython%2Fmachine_learning": [
+      "python",
+      "seti",
+      "lin",
+      "runl",
+      "setlin",
+      "runlin",
+      "setI",
+      "setL",
+      "set",
+      "setLi",
+      "inter"
+    ]
+  }
+}
