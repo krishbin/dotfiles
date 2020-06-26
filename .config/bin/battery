@@ -4,7 +4,7 @@ trim(){ echo "$1"}
 status_bat="$(trim `pmset -g batt | grep -Po "AC" | cut -f 1 -d:`)"
 charge=$(pmset -g batt | grep -Po "\d+%"| grep -Po "\d+")
 if [[ $charge -gt 50 || "$status_bat" = "AC" ]];then
-    out_value="#[fg=colour72]"
+    out_value="#[fg=colour72,bg=colour236]"
 elif [[ charge -gt 25 ]];then
     out_value="#[fg=colour178]"
 else
@@ -12,7 +12,7 @@ else
 fi;
 
 if [[ "$status_bat" = "AC" ]];then
-    echo "$out_value$charge%🔌"
+    echo "$out_value $charge%🔌"
 else
-    echo "$out_value$charge%"
+    echo "$out_value $charge%"
 fi;

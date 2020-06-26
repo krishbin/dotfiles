@@ -16,7 +16,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'pangloss/vim-javascript'
 Plug 'morhetz/gruvbox'
-Plug 'neovim/nvim-lsp'
 Plug 'tpope/vim-fugitive'
 call plug#end()
 "}}}
@@ -283,7 +282,7 @@ let g:lightline = {
             \ 'colorscheme': 'deus',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'gitbranch' ],[ 'readonly', 'absolutepath', 'modified' ] ],
+            \             [ 'gitbranch' ],[ 'readonly', 'absolutepath'],[ 'modified' ] ],
 		    \ 'right': [ ['cocstatuserror','cocstatuswarn', 'lineinfo'],
 		    \            [ 'percent' ],
 		    \            [ 'filetype','pyenv', 'fileencoding'] ] },
