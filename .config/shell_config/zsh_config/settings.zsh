@@ -36,6 +36,12 @@ bindkey -s '^v' '\e'
 # Backspace
 bindkey '^?' backward-delete-char
 bindkey '^H' backward-delete-char
+bindkey "^A"      beginning-of-line
+bindkey "^U"      kill-whole-line
+bindkey "^E"      end-of-line
+bindkey "^D"      delete-char
+bindkey "^F"      forward-char
+bindkey "^B"      backward-char
 
 # Use incremental search
 bindkey "^R" history-incremental-search-backward
