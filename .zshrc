@@ -7,7 +7,7 @@ for file in ~/.config/shell_config/zsh_plugins/*(.); do source "$file"; done
 
 export TERMINAL='alacritty'
 
-[[ -s /Users/krispy/.autojump/etc/profile.d/autojump.sh ]] && source /Users/krispy/.autojump/etc/profile.d/autojump.sh
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 source ~/.config/shell_config/zsh-autosuggestions/zsh-autosuggestions.zsh
 
