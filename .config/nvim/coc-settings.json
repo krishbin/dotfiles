@@ -1,18 +1,86 @@
 {
-    "python.venvFolders":["/usr/local/miniconda3/envs/"],
+    "diagnostic-languageserver.filetypes": {
+        "tex": [
+            "proselint",
+            "alex"
+        ],
+        "text": [
+            "proselint",
+            "alex"
+        ]
+    },
+    "diagnostic-languageserver.linters": {
+        "alex": {
+            "args": [
+                "--stdin"
+            ],
+            "command": "alex",
+            "debounce": 100,
+            "formatLines": 1,
+            "formatPattern": [
+                "^\\s*(\\d+):(\\d+)-(\\d+):(\\d+)\\s{2}([a-z]+)\\s{2}(.*?)\\s{2,}([a-z-]+)\\s{2,}([a-z-]+)$",
+                {
+                    "column": 2,
+                    "endColumn": 4,
+                    "endLine": 3,
+                    "line": 1,
+                    "message": 6,
+                    "security": 5
+                }
+            ],
+            "isStderr": true,
+            "offsetColumn": 0,
+            "offsetLine": 0,
+            "securities": {
+                "error": "error",
+                "note": "info",
+                "warning": "warning"
+            },
+            "sourceName": "alex"
+        },
+        "proselint": {
+            "args": [
+                "-"
+            ],
+            "command": "proselint",
+            "debounce": 200,
+            "formatLines": 1,
+            "formatPattern": [
+                "^[^:]+:(\\d+):(\\d+):(\\s)(.*)$",
+                {
+                    "column": 2,
+                    "line": 1,
+                    "message": 4,
+                    "security": 3
+                }
+            ],
+            "offsetColumn": 0,
+            "offsetLine": 0,
+            "securities": {
+                " ": "info"
+            },
+            "sourceName": "proselint"
+        }
+    },
+    "diagnostic.errorSign": "\ud83d\uded1",
+    "diagnostic.hintSign": "\u27a4",
+    "diagnostic.infoSign": "\u2139",
+    "diagnostic.warningSign": "\u26a0\ufe0f",
+    "html.suggest.angular1": false,
+    "html.suggest.html5": true,
+    "html.suggest.ionic": false,
     "python.jediEnabled": true,
     "python.jediPath": "/usr/local/lib/python3.7/site-packages/",
-    "suggest.maxCompleteItemCount": 30,
-    "diagnostic.errorSign": "🛑",
-    "diagnostic.warningSign": "⚠️",
-    "diagnostic.infoSign": "ℹ",
-    "diagnostic.hintSign": "➤",
-    "suggest.noselect": true,
-    "html.suggest.angular1": false,
-    "html.suggest.ionic": false,
-    "html.suggest.html5": true,
-    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Args": [],
     "python.linting.flake8Enabled": true,
     "python.linting.flake8Path": "flake8",
-    "python.linting.flake8Args": []
+    "python.linting.pylintEnabled": false,
+    "python.venvFolders": [
+        "/usr/local/miniconda3/envs/"
+    ],
+    "snippets.ultisnips.directories": [
+        "~/.config/nvim/UltiSnips"
+    ],
+    "suggest.maxCompleteItemCount": 30,
+    "suggest.noselect": true
 }

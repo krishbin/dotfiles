@@ -14,3 +14,24 @@ alias grep='grep --color=auto'
 alias ls=exa
 alias ll='exa -l'
 alias l='/bin/ls'
+alias qalias='vim $HOME/.config/shell_config/zsh_config/aliases.zsh'
+
+#################
+#  git aliases  #
+#################
+alias ga='g a'
+alias gaa='g aa'
+alias gap='g ap'
+alias gb='g b'
+alias gcob='g cob'
+alias gco='g co'
+alias gl='g l'
+alias gll='g ll'
+alias grl='g rl'
+alias grll='g rll'
+alias grh='g rh'
+alias grb='g rb'
+alias gm='g m'
+alias gp='g p'
+alias gs='g s'
+alias gd='g d'

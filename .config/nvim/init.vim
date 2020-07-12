@@ -15,8 +15,10 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-fugitive'
-Plug 'SirVer/ultisnips'
 Plug 'morhetz/gruvbox'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'lervag/vimtex'
 call plug#end()
 "}}}
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -26,7 +28,6 @@ call plug#end()
 " General configuration
 set nu
 set rnu                                  "line number
-set guifont=JetBrains\ Mono:h12
 set hidden                               "allow buffer to change w/o saving
 set lazyredraw                           "dont execute while running macros
 set termguicolors
@@ -36,6 +37,8 @@ set hlsearch                             "highlight the search results
 set incsearch                            "highlight search results as you type
 set splitbelow
 set splitright
+autocmd Filetype tex set conceallevel=1
+let g:tex_conceal='abdmg'
 set backspace=indent,eol,start
 set ruler
 set colorcolumn=80
@@ -43,11 +46,9 @@ syntax enable
 syntax on                                "syntax highlighting
 set encoding=utf-8
 set numberwidth=4
+set nrformats+=alpha
 set autoread                             "autoread file if it is changed in buffer
 "prgram specific
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
 set expandtab
 set autoindent
 set autochdir                            "autochange directory on the basis of what file you are editing
@@ -57,7 +58,7 @@ set undodir=~/.config/nvim/vimdid
 set wildmenu                             "command line completion
 set cursorline
 set path+=**
-set fdm=marker                           "folding files
+autocmd FileType vim set fdm=marker                           "folding files
 filetype indent on
 filetype plugin on
 
@@ -89,6 +90,9 @@ command! Wq wq
 ":x also writes and quits
 command! Wq x
 
+autocmd Filetype tex map <silent> <leader>gk :silent !/Applications/Skim.app/Contents/SharedSupport/displayline <C-R>=line('.')<CR> "%:p:r.pdf" "%:p" <CR>
+autocmd Filetype tex map <silent> <leader>gl :silent !/Applications/Skim.app/Contents/SharedSupport/displayline <C-R>=line('.')<CR> "main.pdf" "%:p" <CR>
+
 autocmd Filetype dart nnoremap <leader>rr :CocCommand flutter.run<cr>
 autocmd Filetype dart nnoremap <leader>re :CocCommand flutter.dev.hotReload<cr>
 autocmd Filetype dart nnoremap <leader>rs :CocCommand flutter.dev.hotRestart<cr>
@@ -97,8 +101,17 @@ autocmd Filetype dart nnoremap <leader>pg :CocCommand flutter.pub.get<cr>
 "quit help file like man pages
 autocmd Filetype help nmap <silent><buffer> q :q<CR>
 autocmd Filetype help wincmd K
+autocmd FileType tex nnoremap <F5> :silent VimtexCompile<CR>
+autocmd FileType tex inoremap <F5> <esc>:silent VimtexCompile<CR>
 "quit netrw with an additional leader key
 autocmd Filetype netrw nmap <silent><buffer> <leader>q :q<CR>
+autocmd FileType netrw nnoremap ? :help netrw-quickmap<CR>
+
+autocmd Filetype tex :inoreabbrev <buffer> %t \%
+autocmd Filetype tex :inoreabbrev <buffer> $t \$
+autocmd Filetype tex :inoreabbrev <buffer> &t \&
+autocmd Filetype tex :inoreabbrev <buffer> {t \{
+autocmd Filetype tex :inoreabbrev <buffer> }t \}
 """""""""""""""""""
 "markdown specific"
 """""""""""""""""""
@@ -114,6 +127,9 @@ autocmd Filetype python :inoreabbrev <buffer> classs class:<left>
 autocmd Filetype python :inoreabbrev <buffer> deff def:<left>
 autocmd Filetype python nnoremap <leader>rr :silent !tmux send-keys -t 1 "python"" "% "C-m"<cr>
 autocmd Filetype python nnoremap <leader>cl :silent !tmux send-keys -t 1 "C-l"<cr>
+autocmd Filetype python set tabstop=4
+autocmd Filetype python set softtabstop=4
+autocmd Filetype python set shiftwidth=4
 "get into the statement body after it is complete
 autocmd Filetype python inoremap <C-b> <esc>A<cr>
 "automatically format current file according to pep8 standard, python autopep8
@@ -131,15 +147,21 @@ autocmd Filetype javascript,cpp,c :inoreabbrev <buffer> forr for ()<left>
 autocmd Filetype javascript,cpp,c :inoreabbrev <buffer> clog console.log()<left>
 autocmd Filetype javascript,cpp,c :inoreabbrev <buffer> elseif else if ()<left>
 autocmd Filetype javascript :inoreabbrev <buffer> func function
-autocmd Filetype javascript,c,cpp,python inoremap <C-n> ()<left>
+" autocmd Filetype javascript,c,cpp,python inoremap <C-n> ()<left>
 autocmd Filetype javascript nnoremap <leader>rr :silent !tmux send-keys -t 1 "deno"" ""run"" "% "C-m"<cr>
 autocmd Filetype javascript nnoremap <leader>cl :silent !tmux send-keys -t 1 "C-l"<cr>
 "get inside statement body with curly braces already defined
 autocmd Filetype javascript,cpp,c inoremap <C-b> <esc>A {<esc>o<esc>o}<esc>ki<tab>
+autocmd Filetype javascript set tabstop=2
+autocmd Filetype javascript set softtabstop=2
+autocmd Filetype javascript set shiftwidth=2
 
+autocmd Filetype html set tabstop=2
+autocmd Filetype html set softtabstop=2
+autocmd Filetype html set shiftwidth=2
 "format c and cpp files
-autocmd Filetype c,cpp nnoremap <leader><C-s> :%!clang-format %<cr>:w<cr>
-autocmd Filetype javascript nnoremap <leader><C-s> :%!prettier %<cr>:w<cr>
+autocmd Filetype c,cpp nnoremap <leader><C-s> :w!<cr>:%!clang-format %<cr>:w<cr>
+autocmd Filetype javascript nnoremap <leader><C-s> :w!<cr>:%!prettier %<cr>:w<cr>
 "make json pretty
 autocmd Filetype json nnoremap <leader><C-s> :w!<cr>:%!python -m json.tool %<cr>:w<cr>
 
@@ -160,6 +182,7 @@ nnoremap ,py :-1r $HOME/.config/nvim/snippets/main.py<cr>o
 
 "make space as the leader key
 let mapleader = "\<Space>"
+let maplocalleader = ","
 "change vim window quickly by leader hjkl
 nnoremap <leader>h <C-w>h
 nnoremap <leader>j <C-w>j
@@ -257,9 +280,18 @@ colorscheme gruvbox
 " let g:gruvbox_contrast_dark="soft"
 set background=dark
 let g:highlightedyank_highlight_duration = 200
+let g:snips_author="krishbin"
+let g:vimtex_compiler_progname = 'nvr'
 
 let g:UltiSnipsExpandTrigger = "<C-y>"
+let g:UltiSnipsJumpForwardTrigger="<C-n>"
+let g:UltiSnipsJumpBackwardTrigger="<C-z>"
+let g:UltiSnipsListSnippets="<C-l>"
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "plugged/vim-snippets/UltiSnips"]
+let g:tex_flavor = "latex"
+let g:vimtex_view_method = 'skim'
 
+autocmd BufRead,BufNewFile *.md,gitcommit,tex setlocal spell
 
 function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')
@@ -327,14 +359,17 @@ let g:lightline.enable = {
 
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
-let g:python3_host_prog = "/usr/local/bin/python3"
+let g:python3_host_prog="/usr/local/bin/python3"
 let g:gruvbox_color_column="bg3"
+let g:vimtex_enabled=1
+let g:vimtex_fold_enabled=1
 let g:netrw_banner=0
 let g:netrw_altv=1
 let g:netrw_liststyle=3
-let g:netrw_browse_split = 0
+let g:netrw_browse_split=0
 let g:netrw_winsize=15
 
+"}}}
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           statusline                              "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -349,18 +384,18 @@ function! StatuslineGit()
 endfunction
 
 
-set statusline=
-set statusline+=%#PmenuSel#
-set statusline+=%{StatuslineGit()}
-set statusline+=\ %f
-set statusline+=\ %y
-set statusline+=\ %m
+"set statusline=
+"set statusline+=%#PmenuSel#
+"set statusline+=%{StatuslineGit()}
+"set statusline+=\ %f
+"set statusline+=\ %y
+"set statusline+=\ %m
 
-set statusline+=%=
-set statusline+=%#PmenuSel#
-set statusline+=\ [%{&fileencoding?&fileencoding:&encoding}]
-set statusline+=\ %c
-set statusline+=\ %p%%
-set statusline+=\ %l:%L
-set statusline+=\
+"set statusline+=%=
+"set statusline+=%#PmenuSel#
+"set statusline+=\ [%{&fileencoding?&fileencoding:&encoding}]
+"set statusline+=\ %c
+"set statusline+=\ %p%%
+"set statusline+=\ %l:%L
+"set statusline+=\
 "}}}

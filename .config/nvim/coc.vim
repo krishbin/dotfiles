@@ -91,3 +91,4 @@ nnoremap <silent><nowait> ,s  :<C-u>CocList -I symbols<cr>
 nnoremap <silent><nowait> ,j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent><nowait> ,k  :<C-u>CocPrev<CR>
+

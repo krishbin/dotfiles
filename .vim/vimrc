@@ -1,3 +1,4 @@
 source $HOME/.config/nvim/init.vim
-set guifont=JetBrains\ Mono:h12
+set guifont=JetBrains\ Mono:h11
 set laststatus=2
+set guioptions=
