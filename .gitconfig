@@ -1,0 +1,42 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+        name = Krishbin Paudel
+        email = krishbinp@outlook.com
+[alias]
+        a = add
+        aa = add --all
+        ap = add -p
+        b = branch
+        bco = checkout -b
+        c = commit --verbose
+        ca = commit --amend --verbose
+        co = checkout
+        cob = checkout -b
+        count = !git rev-list --all | wc -l
+        d = diff
+        dc = diff --word-diff --color-words --cached
+        l = log --decorate --graph --oneline -20
+        ll = log --decorate --graph --oneline
+        rl = reflog -20
+        rll = reflog
+        sla = log --all --decorate --graph --oneline
+        m = merge
+        mf = merge --ff-only
+        mn = merge --no-ff
+        p = push
+        pll = pull
+        r = reset
+        rb = rebase
+        rba = rebase --abort
+        rbc = rebase --continue
+        rbi = rebase -i
+        rh = reset --hard
+        s = status -sb
+        unstage = reset
+        undo = revert
+
+[merge]
+        tool = nvim -d
+[github]
+        user = krishbin

@@ -6,12 +6,14 @@ hyper_a = {"ctrl","command"}
 require('window')
 require('layout')
 clipboardTool = hs.loadSpoon("ClipboardTool")
+clock = hs.loadSpoon("AClock")
 hs.loadSpoon("FnMate")
 --general
 clipboardTool.show_in_menubar = false
 clipboardTool.paste_on_select = true
 hs.hotkey.bind(hyper_c, "v", function() clipboardTool:toggleClipboard() end)
 hs.hotkey.bind(hyper_s, "v", function() clipboardTool:clearAll() end)
+hs.hotkey.bind(hyper_c, "c", function() clock:toggleShow() end)
 clipboardTool:start()
 
 hs.window.animationDuration = 0

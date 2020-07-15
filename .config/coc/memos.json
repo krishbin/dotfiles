@@ -303,25 +303,25 @@
       },
       {
         "architecture": 3,
-        "path": "/usr/local/miniconda3/envs/web_dev/bin/python",
+        "path": "/System/Library/Frameworks/Python.framework/Versions/2.7/Resources/Python.app/Contents/MacOS/Python",
         "version": {
           "options": {
             "loose": false,
             "includePrerelease": false
           },
           "loose": false,
-          "raw": "3.7.7-final",
-          "major": 3,
+          "raw": "2.7.16-final",
+          "major": 2,
           "minor": 7,
-          "patch": 7,
+          "patch": 16,
           "prerelease": [
             "final"
           ],
           "build": [],
-          "version": "3.7.7-final"
+          "version": "2.7.16-final"
         },
-        "sysPrefix": "/usr/local/miniconda3/envs/web_dev",
-        "fileHash": "e7183ddec445c5c4c8a0ff7f192263855a39a29e976eec936152be4768c68d88a00f358e31f3faf484c42998d756805a8845cc979266c7dab67bf0c989e2cc88",
+        "sysPrefix": "/System/Library/Frameworks/Python.framework/Versions/2.7",
+        "fileHash": "b3507c3ffecbaa13ce043dc70bde9a175074fefb5489aa43e347d26254c43ff2ba4956352ed3c49035d97c6bba190d2410444087e0d2d60718c5aeebd0005ccf",
         "type": "Unknown"
       }
     ],
@@ -363,22 +363,7 @@
       "expiry": 1594143714030
     },
     "ProposeLSBanner": false,
-    "CONDA_ENVIRONMENTS": {
-      "data": [
-        {
-          "name": "base",
-          "path": "/usr/local/miniconda3"
-        },
-        {
-          "name": "ml",
-          "path": "/usr/local/miniconda3/envs/ml"
-        },
-        {
-          "name": "web_dev",
-          "path": "/usr/local/miniconda3/envs/web_dev"
-        }
-      ]
-    },
+    "CONDA_ENVIRONMENTS": {},
     "INTERPRETERS_CACHE_v3_CondaEnvFileService": [
       {
         "architecture": 3,
@@ -404,7 +389,7 @@
         "companyDisplayName": "Anaconda, Inc.",
         "type": "Conda",
         "envPath": "/usr/local/miniconda3",
-        "envName": "base"
+        "envName": "miniconda3"
       },
       {
         "architecture": 3,
@@ -786,112 +771,7 @@
         "type": "Unknown"
       }
     ],
-    "INTERPRETERS_CACHE_v3_CondaEnvService": [
-      {
-        "architecture": 3,
-        "path": "/usr/local/miniconda3/bin/python",
-        "version": {
-          "options": {
-            "loose": false,
-            "includePrerelease": false
-          },
-          "loose": false,
-          "raw": "3.7.7-final",
-          "major": 3,
-          "minor": 7,
-          "patch": 7,
-          "prerelease": [
-            "final"
-          ],
-          "build": [],
-          "version": "3.7.7-final"
-        },
-        "sysPrefix": "/usr/local/miniconda3",
-        "fileHash": "8853fb9dda81c9e54c32af1f24041169c8d6ea425dc447d6330f75405bd619a748557966febc5b6977ad0ac3770537ae395fb4c886967b37d85a64424beb5be7",
-        "companyDisplayName": "Anaconda, Inc.",
-        "type": "Conda",
-        "envPath": "/usr/local/miniconda3",
-        "envName": "base"
-      },
-      {
-        "architecture": 3,
-        "path": "/usr/local/miniconda3/envs/ml/bin/python",
-        "version": {
-          "options": {
-            "loose": false,
-            "includePrerelease": false
-          },
-          "loose": false,
-          "raw": "3.7.7-final",
-          "major": 3,
-          "minor": 7,
-          "patch": 7,
-          "prerelease": [
-            "final"
-          ],
-          "build": [],
-          "version": "3.7.7-final"
-        },
-        "sysPrefix": "/usr/local/miniconda3/envs/ml",
-        "fileHash": "a3223b268f03f186179465c86450ee322568b9423451b040837e7c154fa7d363bb6d9b7f2ddd6e4fe7564851dbe0a2e8883247859ce817a4fb7981725523192e",
-        "companyDisplayName": "Anaconda, Inc.",
-        "type": "Conda",
-        "envPath": "/usr/local/miniconda3/envs/ml",
-        "envName": "ml"
-      },
-      {
-        "architecture": 3,
-        "path": "/usr/local/miniconda3/envs/web_dev/bin/python",
-        "version": {
-          "options": {
-            "loose": false,
-            "includePrerelease": false
-          },
-          "loose": false,
-          "raw": "3.7.7-final",
-          "major": 3,
-          "minor": 7,
-          "patch": 7,
-          "prerelease": [
-            "final"
-          ],
-          "build": [],
-          "version": "3.7.7-final"
-        },
-        "sysPrefix": "/usr/local/miniconda3/envs/web_dev",
-        "fileHash": "e7183ddec445c5c4c8a0ff7f192263855a39a29e976eec936152be4768c68d88a00f358e31f3faf484c42998d756805a8845cc979266c7dab67bf0c989e2cc88",
-        "companyDisplayName": "Anaconda, Inc.",
-        "type": "Conda",
-        "envPath": "/usr/local/miniconda3/envs/web_dev",
-        "envName": "web_dev"
-      },
-      {
-        "architecture": 3,
-        "path": "/usr/local/miniconda3/bin/python",
-        "version": {
-          "options": {
-            "loose": false,
-            "includePrerelease": false
-          },
-          "loose": false,
-          "raw": "3.7.7-final",
-          "major": 3,
-          "minor": 7,
-          "patch": 7,
-          "prerelease": [
-            "final"
-          ],
-          "build": [],
-          "version": "3.7.7-final"
-        },
-        "sysPrefix": "/usr/local/miniconda3",
-        "fileHash": "8853fb9dda81c9e54c32af1f24041169c8d6ea425dc447d6330f75405bd619a748557966febc5b6977ad0ac3770537ae395fb4c886967b37d85a64424beb5be7",
-        "companyDisplayName": "Anaconda, Inc.",
-        "type": "Conda",
-        "envPath": "/usr/local/miniconda3",
-        "envName": "base"
-      }
-    ],
+    "INTERPRETERS_CACHE_v3_CondaEnvService": [],
     "PipEnvInformation": [],
     "/usr/local/miniconda3/bin/python.interpreter.displayName.v7": {
       "data": {
@@ -1607,7 +1487,8 @@
       },
       "sysPrefix": "/usr/local/Cellar/python@3.8/3.8.3_2/Frameworks/Python.framework/Versions/3.8",
       "fileHash": "b6a962b400488ae5dd5f13aca156c9496f25c8c8863371175c8d3712caf60d2c0969d8f136ccf8939d15ae01da2b26ee619023189726ea3235ff5855c1f02364",
-      "type": "Unknown"
+      "type": "Unknown",
+      "cachedEntry": true
     },
     "/usr/local/opt/python@3.8/bin/python3.8.interpreter.displayName.v7": {
       "data": {
@@ -1638,6 +1519,7 @@
       "sysPrefix": "/usr/local/Cellar/python@3.8/3.8.3_2/Frameworks/Python.framework/Versions/3.8",
       "fileHash": "b6a962b400488ae5dd5f13aca156c9496f25c8c8863371175c8d3712caf60d2c0969d8f136ccf8939d15ae01da2b26ee619023189726ea3235ff5855c1f02364",
       "type": "Unknown",
+      "cachedEntry": true,
       "displayName": "Python 3.8.3 64-bit"
     },
     "/usr/local/opt/python@3.8/bin/python3.8.interpreter.Details.v7": {
