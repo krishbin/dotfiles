@@ -21,7 +21,7 @@ function PR_ERROR() {
 }
 
 # The arrow symbol that is used in the prompt
-PR_ARROW_CHAR="%B>%b"
+PR_ARROW_CHAR="%B❯%b"
 # The arrow in red (for root) or violet (for regular user)
 function PR_ARROW() {
         echo "%(!.%F{160}.%F{134})${PR_ARROW_CHAR}%{$reset_color%}"
