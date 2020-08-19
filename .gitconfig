@@ -3,6 +3,12 @@
 # Please adapt and uncomment the following lines:
         name = Krishbin Paudel
         email = krishbinp@outlook.com
+[ui "color"]
+        ui = always
+[color]
+        ui = true
+[url "git@github.com:"]
+	insteadOf = gh:
 [alias]
         a = add
         aa = add --all

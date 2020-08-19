@@ -12,7 +12,7 @@ else
 fi;
 
 if [[ "$status_bat" = "AC" ]];then
-    echo "$out_value $charge%🔌"
+    echo "$out_value $charge%#[bg=colour72] #[bg=colour236]"
 else
     echo "$out_value $charge%"
 fi;

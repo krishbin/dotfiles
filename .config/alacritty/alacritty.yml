@@ -14,13 +14,13 @@ background_opacity: 1.00
 font:
   normal:
     family: JetBrains Mono
-    style: Regular
+    style: Semi Light
   bold:
     family: JetBrains Mono
     style: Medium
   italic:
     family: JetBrains Mono
-    style: Italic
+    style: Semi Italic
 #  bold_italic:
 #    family: JetBrains Mono
 #    style: Bold Italic
@@ -94,7 +94,7 @@ colors:
 #     cyan:    '0x93a1a1'
 #     white:   '0xfdf6e3'
 
-visual_bell:
+bell:
   animation: EaseOutExpo
   duration: 0
   color: '#ffffff'

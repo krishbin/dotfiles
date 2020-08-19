@@ -162,6 +162,9 @@ autocmd Filetype html set shiftwidth=2
 "format c and cpp files
 autocmd Filetype c,cpp nnoremap <leader><C-s> :w!<cr>:%!clang-format %<cr>:w<cr>
 autocmd Filetype javascript nnoremap <leader><C-s> :w!<cr>:%!prettier %<cr>:w<cr>
+autocmd Filetype cpp nnoremap <leader>cc :silent !tmux send-keys -t 1 "g++"" "% "C-m"<cr>
+autocmd Filetype cpp nnoremap <leader>cl :silent !tmux send-keys -t 1 "C-l"<cr>
+autocmd Filetype cpp nnoremap <leader>rr :silent !tmux send-keys -t 1 "./a.out" "C-m"<cr>
 "make json pretty
 autocmd Filetype json nnoremap <leader><C-s> :w!<cr>:%!python -m json.tool %<cr>:w<cr>
 
@@ -283,9 +286,9 @@ let g:highlightedyank_highlight_duration = 200
 let g:snips_author="krishbin"
 let g:vimtex_compiler_progname = 'nvr'
 
-let g:UltiSnipsExpandTrigger = "<C-y>"
-let g:UltiSnipsJumpForwardTrigger="<C-n>"
-let g:UltiSnipsJumpBackwardTrigger="<C-z>"
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 let g:UltiSnipsListSnippets="<C-l>"
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "plugged/vim-snippets/UltiSnips"]
 let g:tex_flavor = "latex"
