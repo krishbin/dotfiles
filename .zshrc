@@ -33,3 +33,4 @@ export PATH="/usr/local/opt/llvm/bin:$PATH"
 export FZF_DEFAULT_COMMAND="rg --files --hidden"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PYTHONSTARTUP=~/.pythonrc
+export OPENSSL_ROOT_DIR=/usr/local/opt/openssl@1.1

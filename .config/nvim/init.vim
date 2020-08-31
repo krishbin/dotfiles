@@ -7,7 +7,9 @@ Plug 'bronson/vim-trailing-whitespace'
 " Plug 'flazz/vim-colorschemes'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'Yggdroot/indentLine'
 Plug 'machakann/vim-highlightedyank'
+Plug 'posva/vim-vue'
 Plug 'itchyny/lightline.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dart-lang/dart-vim-plugin'
@@ -20,6 +22,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'lervag/vimtex'
 Plug 'luochen1990/rainbow'
+Plug 'preservim/nerdtree'
 call plug#end()
 "}}}
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -138,6 +141,10 @@ autocmd Filetype python inoremap <C-b> <esc>A<cr>
 autocmd Filetype python nnoremap <leader><C-s> :w!<cr>:%!autopep8 %<cr>:w<cr>:%!isort -d %<cr>:w<cr>
 
 
+autocmd Filetype html,vue set tabstop=2
+autocmd Filetype html,vue set softtabstop=2
+autocmd Filetype html,vue set shiftwidth=2
+
 """""""""""""""""""""""""""
 "javascript and c specific"
 """""""""""""""""""""""""""
@@ -149,7 +156,7 @@ autocmd Filetype javascript,cpp,c :inoreabbrev <buffer> clog console.log()<left>
 autocmd Filetype javascript,cpp,c :inoreabbrev <buffer> elseif else if ()<left>
 autocmd Filetype javascript :inoreabbrev <buffer> func function
 " autocmd Filetype javascript,c,cpp,python inoremap <C-n> ()<left>
-autocmd Filetype javascript nnoremap <leader>rr :silent !tmux send-keys -t 1 "deno"" ""run"" "% "C-m"<cr>
+autocmd Filetype javascript nnoremap <leader>rr :silent !tmux send-keys -t 1 "node"" "% "C-m"<cr>
 autocmd Filetype javascript nnoremap <leader>cl :silent !tmux send-keys -t 1 "C-l"<cr>
 "get inside statement body with curly braces already defined
 autocmd Filetype javascript,cpp,c inoremap <C-b> <esc>A {<esc>o<esc>o}<esc>ki<tab>
@@ -202,8 +209,11 @@ nnoremap j gj
 nnoremap k gk
 "open a new tab
 nnoremap <leader>to :<C-u>tabnew<cr>
+" move tab right
+noremap <silent><A-Left>  :-tabmove<cr>
+noremap <silent><A-Right> :+tabmove<cr>
 "close a tab
-nnoremap <leader>tc :<C-u>tabclose<cr>
+nnoremap <leader>t{ :<C-u>tabclose<cr>
 "maximize a window that is focused
 nnoremap <leader>z :wincmd _<cr>:wincmd \|<cr>
 "minimize the maximized window
@@ -212,9 +222,9 @@ nnoremap <leader>Z :wincmd =<cr>
 nnoremap <C-p> :Files<cr>
 nnoremap <leader><C-p> :Buffers<cr>
 "left explorer
-nmap <leader>e :Lexplore<cr>
+nmap <leader>e :NERDTreeCWD<cr>
 "open a file explorer
-nmap <leader>o :Explore<cr>
+nmap <leader>o :NERDTreeToggle<cr>
 "resize vimsplits with hjkl
 nmap <leader>rh <C-w>5>
 nmap <leader>rj <C-w>3-
@@ -281,17 +291,20 @@ source $HOME/.config/nvim/coc.vim
 "built into neovim"
 """""""""""""""""""
 colorscheme gruvbox
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " let g:gruvbox_contrast_dark="soft"
 set background=dark
 let g:highlightedyank_highlight_duration = 200
 let g:snips_author="krishbin"
 let g:vimtex_compiler_progname = 'nvr'
 
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
+let g:UltiSnipsExpandTrigger = "<c-y>"
+let g:UltiSnipsJumpForwardTrigger="<c-e>"
+let g:UltiSnipsJumpBackwardTrigger="<c-y>"
 let g:UltiSnipsListSnippets="<C-l>"
-let g:UltiSnipsSnippetDirectories=["UltiSnips", "plugged/vim-snippets/UltiSnips"]
+let g:UltiSnipsSnippetDirectories=["Ultisnips", "~/.config/nvim/plugged/vim-snippets/UltiSnips"]
+let g:UltiSnipsSnippetsDir=["Ultisnips", "~/.config/nvim/plugged/vim-snippets/UltiSnips"]
 let g:tex_flavor = "latex"
 let g:vimtex_view_method = 'skim'
 

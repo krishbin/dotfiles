@@ -4,8 +4,6 @@ hyper_c = {"ctrl","alt","command"}
 hyper_a = {"ctrl","command"}
 
 require('window')
-require('layout')
-clipboardTool = hs.loadSpoon("ClipboardTool")
 hs.loadSpoon("FnMate")
 --general
 -- clipboardTool.show_in_menubar = false

@@ -24,5 +24,12 @@
     "%2FUsers%2Fkrispy%2FWorkshop%2Fjavascript%2Fvue%2Flearning": [
       "ts"
     ]
+  },
+  "extensions": {
+    "%2FUsers%2Fkrispy%2F": {
+      "hammerspoon": [
+        "jj"
+      ]
+    }
   }
 }
