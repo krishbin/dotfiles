@@ -1,7 +1,0 @@
-python.setInterpreter
-python.setLinter
-python.runLinting
-flutter.dev.quit
-flutter.run
-flutter.dev.hotReload
-flutter.dev.hotRestart

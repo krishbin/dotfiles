@@ -21,7 +21,6 @@ Plug 'morhetz/gruvbox'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'lervag/vimtex'
-Plug 'luochen1990/rainbow'
 Plug 'preservim/nerdtree'
 call plug#end()
 "}}}
@@ -65,12 +64,15 @@ set path+=**
 autocmd FileType vim set fdm=marker                           "folding files
 filetype indent on
 filetype plugin on
+let g:indentLine_enabled = 0
+autocmd FileType html let g:indentLine_enabled=0
 
 if has("nvim")
 set inccommand=nosplit                   "live find and replace
 endif
 
 "}}}
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           maping                                  "
