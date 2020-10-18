@@ -137,15 +137,15 @@ autocmd Filetype python set tabstop=4
 autocmd Filetype python set softtabstop=4
 autocmd Filetype python set shiftwidth=4
 "get into the statement body after it is complete
-autocmd Filetype python inoremap <C-b> <esc>A<cr>
+autocmd Filetype python inoremap <C-b> <esc>Ao
 "automatically format current file according to pep8 standard, python autopep8
 "required
 autocmd Filetype python nnoremap <leader><C-s> :w!<cr>:%!autopep8 %<cr>:w<cr>:%!isort -d %<cr>:w<cr>
 
 
-autocmd Filetype html,vue set tabstop=2
-autocmd Filetype html,vue set softtabstop=2
-autocmd Filetype html,vue set shiftwidth=2
+autocmd Filetype tex,html,vue set tabstop=2
+autocmd Filetype tex,html,vue set softtabstop=2
+autocmd Filetype tex,html,vue set shiftwidth=2
 
 """""""""""""""""""""""""""
 "javascript and c specific"
@@ -162,13 +162,10 @@ autocmd Filetype javascript nnoremap <leader>rr :silent !tmux send-keys -t 1 "no
 autocmd Filetype javascript nnoremap <leader>cl :silent !tmux send-keys -t 1 "C-l"<cr>
 "get inside statement body with curly braces already defined
 autocmd Filetype javascript,cpp,c inoremap <C-b> <esc>A {<esc>o<esc>o}<esc>ki<tab>
-autocmd Filetype javascript set tabstop=2
-autocmd Filetype javascript set softtabstop=2
-autocmd Filetype javascript set shiftwidth=2
 
-autocmd Filetype html set tabstop=2
-autocmd Filetype html set softtabstop=2
-autocmd Filetype html set shiftwidth=2
+autocmd Filetype tex,javascript,cpp,c,html set tabstop=2
+autocmd Filetype tex,javascript,cpp,c,html set softtabstop=2
+autocmd Filetype tex,javascript,cpp,c,html set shiftwidth=2
 "format c and cpp files
 autocmd Filetype c,cpp nnoremap <leader><C-s> :w!<cr>:%!clang-format %<cr>:w<cr>
 autocmd Filetype javascript nnoremap <leader><C-s> :w!<cr>:%!prettier %<cr>:w<cr>

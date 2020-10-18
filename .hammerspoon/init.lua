@@ -4,6 +4,7 @@ hyper_c = {"ctrl","alt","command"}
 hyper_a = {"ctrl","command"}
 
 require('window')
+require('util')
 hs.loadSpoon("FnMate")
 --general
 -- clipboardTool.show_in_menubar = false
@@ -22,12 +23,12 @@ hs.window.setShadows(false)
 
 
 hs.fnutils.each({
-        { key = "t", app = "alacritty"},
-        { key = "e", app = "VimR"},
+        { key = "i", app = "iTerm"},
+        { key = "e", app = "MacVim"},
         { key = "r", app = "Skim"},
         { key = "s", app = "Safari"},
         { key = "m", app = "Mail"},
-        { key = "p", app = "/Applications/KeePassXC.app"},
+        { key = "p", app = "Preview"},
 },function(object)
         hs.hotkey.bind(hyper_a, object.key,
         function()

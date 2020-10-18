@@ -1,18 +1,18 @@
 #zsh_setup
-for f in ~/.config/shell_config/zsh_config/*(.); do source "$f"; done
+for f in ~/.config/shell_config/config_zsh/*(.); do source "$f"; done
 
 fpath=( "$HOME/.zfunctions" $fpath )
 
-for file in ~/.config/shell_config/zsh_plugins/*(.); do source "$file"; done
+for file in ~/.config/shell_config/plugins_zsh/*(.); do source "$file"; done
 
-export TERMINAL='alacritty'
+export TERMINAL='iTerm'
 
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 source ~/.config/shell_config/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-#flutter path
-export PATH="$PATH:/usr/local/flutter/bin"
 export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
 
 # >>> conda initialize >>>
@@ -29,5 +29,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
-[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
