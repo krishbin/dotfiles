@@ -6,16 +6,12 @@ hyper_a = {"ctrl","command"}
 require('window')
 require('util')
 hs.loadSpoon("FnMate")
---general
--- clipboardTool.show_in_menubar = false
--- clipboardTool.paste_on_select = true
--- hs.hotkey.bind(hyper_c, "v", function() clipboardTool:toggleClipboard() end)
--- hs.hotkey.bind(hyper_s, "v", function() clipboardTool:clearAll() end)
--- clipboardTool:start()
 
 hs.window.animationDuration = 0
 hs.window.setShadows(false)
 
+
+hs.timer.doAt("0:00","1h", function() hs.alert("Ding Dong") end)
 
 -------------------------
 --  open app or focus  --
@@ -24,11 +20,12 @@ hs.window.setShadows(false)
 
 hs.fnutils.each({
         { key = "i", app = "iTerm"},
-        { key = "e", app = "MacVim"},
+        { key = "m", app = "VimR"},
         { key = "r", app = "Skim"},
         { key = "s", app = "Safari"},
-        { key = "m", app = "Mail"},
+        { key = "e", app = "Mail"},
         { key = "p", app = "Preview"},
+        { key = "x", app = "Xcode"},
 },function(object)
         hs.hotkey.bind(hyper_a, object.key,
         function()

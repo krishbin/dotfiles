@@ -23,14 +23,14 @@ hs.hotkey.bind(hyper, 'return', function() hs.window.focusedWindow():moveToUnit(
 hs.hotkey.bind(hyper, 'c', function() hs.window.focusedWindow():centerOnScreen() end)
 
 -- move between displays
-hs.hotkey.bind({'ctrl', 'alt', 'cmd'}, 'l', function()
+hs.hotkey.bind(hyper_c, 'l', function()
   local win = hs.window.focusedWindow()
   local next = win:screen():toEast()
   if next then
     win:moveToScreen(next, true)
   end
 end)
-hs.hotkey.bind({'ctrl', 'alt', 'cmd'}, 'h', function()
+hs.hotkey.bind(hyper_c, 'h', function()
   local win = hs.window.focusedWindow()
   local next = win:screen():toWest()
   if next then
@@ -119,28 +119,4 @@ hs.hotkey.bind(hyper, "up", function()
      g.h = g.h - 1
      hs.grid.set(win, g)
   end
-end)
-
-hs.hotkey.bind(hyper_c, "left", function()
-  local win = hs.window.focusedWindow()
-  if win == nil then return end
-  hs.grid.pushWindowLeft(win)
-end)
-
-hs.hotkey.bind(hyper_c, "right", function()
-  local win = hs.window.focusedWindow()
-  if win == nil then return end
-  hs.grid.pushWindowRight(win)
-end)
-
-hs.hotkey.bind(hyper_c, "up", function()
-  local win = hs.window.focusedWindow()
-  if win == nil then return end
-  hs.grid.pushWindowUp(win)
-end)
-
-hs.hotkey.bind(hyper_c, "down", function()
-  local win = hs.window.focusedWindow()
-  if win == nil then return end
-  hs.grid.pushWindowDown(win)
 end)
