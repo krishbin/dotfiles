@@ -31,7 +31,7 @@ Plug 'morhetz/gruvbox'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'lervag/vimtex'
-Plug 'preservim/nerdtree'
+Plug 'kyazdani42/nvim-tree.lua'
 call plug#end()
 "}}}
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -239,9 +239,6 @@ nnoremap <leader>Z :wincmd =<cr>
 nnoremap <C-p> :Files<cr>
 nnoremap <leader><C-p> :Buffers<cr>
 "left explorer
-nmap <leader>e :NERDTreeCWD<cr>
-"open a file explorer
-nmap <leader>o :NERDTreeToggle<cr>
 "resize vimsplits with hjkl
 nmap <leader>rh <C-w>5>
 nmap <leader>rj <C-w>3-
@@ -314,6 +311,8 @@ local on_attach_vim = function(client)
 end
 
 require'nvim_lsp'.clangd.setup{on_attach=on_attach_vim}
+require'nvim_lsp'.texlab.setup{on_attach=on_attach_vim}
+require'nvim_lsp'.tsserver.setup{on_attach=on_attach_vim}
 
 require'nvim-treesitter.configs'.setup {
   highlight = {
@@ -405,14 +404,71 @@ set shortmess+=c
 
 colorscheme gruvbox
 
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
 " let g:gruvbox_contrast_dark="soft"
 set background=dark
 let g:highlightedyank_highlight_duration = 200
 let g:snips_author="krishbin"
 let g:vimtex_compiler_progname = 'nvr'
+
+let g:lua_tree_side = 'left' "left by default
+let g:lua_tree_width = 30 "30 by default
+let g:lua_tree_ignore = [ '.git', 'node_modules', '.cache' ] "empty by default
+let g:lua_tree_auto_open = 1 "0 by default, opens the tree when typing `vim $DIR` or `vim`
+let g:lua_tree_quit_on_open = 1 "0 by default, closes the tree when you open a file
+let g:lua_tree_follow = 1 "0 by default, this option allows the cursor to be updated when entering a buffer
+let g:lua_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
+let g:lua_tree_hide_dotfiles = 1 "0 by default, this option hides files and folders starting with a dot `.`
+let g:lua_tree_git_hl = 1 "0 by default, will enable file highlight for git attributes (can be used without the icons).
+let g:lua_tree_root_folder_modifier = ':~' "This is the default. See :help filename-modifiers for more options
+let g:lua_tree_show_icons = {
+    \ 'git': 1,
+    \ 'folders': 1,
+    \ 'files': 1,
+    \ }
+let g:lua_tree_bindings = {
+    \ 'edit':            ['<CR>', 'o'],
+    \ 'edit_vsplit':     '<C-v>',
+    \ 'edit_split':      '<C-h>',
+    \ 'edit_tab':        '<C-t>',
+    \ 'toggle_ignored':  'I',
+    \ 'toggle_dotfiles': 'H',
+    \ 'refresh':         'R',
+    \ 'preview':         '<Tab>',
+    \ 'cd':              '<C-]>',
+    \ 'create':          'a',
+    \ 'remove':          'd',
+    \ 'rename':          'r',
+    \ 'cut':             'x',
+    \ 'copy':            'c',
+    \ 'paste':           'p',
+    \ 'prev_git_item':   '[c',
+    \ 'next_git_item':   ']c',
+    \ }
+
+" Disable default mappings by plugin
+" Bindings are enable by default, disabled on any non-zero value
+" let lua_tree_disable_keybindings=1
+
+let g:lua_tree_icons = {
+    \ 'default': '',
+    \ 'symlink': '',
+    \ 'git': {
+    \   'unstaged': "✗",
+    \   'staged': "✓",
+    \   'unmerged': "",
+    \   'renamed': "➜",
+    \   'untracked': "★"
+    \   },
+    \ 'folder': {
+    \   'default': "",
+    \   'open': ""
+    \   }
+    \ }
+
+nnoremap <leader>o :LuaTreeToggle<CR>
+nnoremap <leader>r :LuaTreeRefresh<CR>
+nnoremap <leader>n :LuaTreeFindFile<CR>
+" LuaTreeOpen and LuaTreeClose are also available if you need them
 
 let g:UltiSnipsExpandTrigger = "<c-y>"
 let g:UltiSnipsJumpForwardTrigger="<c-e>"
