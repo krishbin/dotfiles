@@ -5,23 +5,13 @@
 call plug#begin('~/.config/nvim/plugged')
 Plug 'bronson/vim-trailing-whitespace'
 " Plug 'flazz/vim-colorschemes'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'Yggdroot/indentLine'
 Plug 'machakann/vim-highlightedyank'
 Plug 'posva/vim-vue'
-
-"lsp
-Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
-Plug 'nvim-lua/diagnostic-nvim'
-
-"fuzzy
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-lua/telescope.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
-
-Plug 'nvim-treesitter/nvim-treesitter'
-
 Plug 'itchyny/lightline.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
@@ -71,8 +61,6 @@ set undodir=~/.config/nvim/vimdid
 set wildmenu                             "command line completion
 set cursorline
 set path+=**
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
 autocmd FileType vim set fdm=marker                           "folding files
 filetype indent on
 filetype plugin on
@@ -80,7 +68,7 @@ let g:indentLine_enabled = 0
 autocmd FileType html let g:indentLine_enabled=0
 
 if has("nvim")
-        set inccommand=nosplit                   "live find and replace
+set inccommand=nosplit                   "live find and replace
 endif
 
 "}}}
@@ -94,8 +82,8 @@ map Q <nop>
 nnoremap <silent> Q :cclose<CR>:lclose<CR>
 nnoremap <leader>W :wq<cr>
 if has('nvim')
-        "normal mode in terminal
-        tnoremap <C-n> <C-\><C-n>
+    "normal mode in terminal
+    tnoremap <C-n> <C-\><C-n>
 endif
 
 "make it easier to edit and quit files
@@ -111,6 +99,11 @@ command! Wq x
 autocmd Filetype tex map <silent> <leader>gk :silent !/Applications/Skim.app/Contents/SharedSupport/displayline <C-R>=line('.')<CR> "%:p:r.pdf" "%:p" <CR>
 autocmd Filetype tex map <silent> <leader>gl :silent !/Applications/Skim.app/Contents/SharedSupport/displayline <C-R>=line('.')<CR> "main.pdf" "%:p" <CR>
 
+autocmd Filetype dart nnoremap <leader>rr :CocCommand flutter.run<cr>
+autocmd Filetype dart nnoremap <leader>re :CocCommand flutter.dev.hotReload<cr>
+autocmd Filetype dart nnoremap <leader>rs :CocCommand flutter.dev.hotRestart<cr>
+autocmd Filetype dart nnoremap <leader>pg :CocCommand flutter.pub.get<cr>
+
 "quit help file like man pages
 autocmd Filetype help nmap <silent><buffer> q :q<CR>
 autocmd Filetype help wincmd K
@@ -125,17 +118,6 @@ autocmd Filetype tex :inoreabbrev <buffer> $t \$
 autocmd Filetype tex :inoreabbrev <buffer> &t \&
 autocmd Filetype tex :inoreabbrev <buffer> {t \{
 autocmd Filetype tex :inoreabbrev <buffer> }t \}
-
-
-nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 """""""""""""""""""
 "markdown specific"
 """""""""""""""""""
@@ -302,112 +284,14 @@ cnoremap <Down> <C-n>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           vim-set                                 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 "{{{
 """""""""""""""""""
+source $HOME/.config/nvim/coc.vim
 "built into neovim"
 """""""""""""""""""
-lua <<EOF
-local on_attach_vim = function(client)
-  require'completion'.on_attach(client)
-  require'diagnostic'.on_attach(client)
-end
-
-require'nvim_lsp'.clangd.setup{on_attach=on_attach_vim}
-
-require'nvim-treesitter.configs'.setup {
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-    use_languagetree = false,
-  },
-  indent = {
-    enable = true
-  }
-}
-
-require'nvim-web-devicons'.setup {
- -- your personnal icons can go here (to override)
- -- DevIcon will be appended to `name`
- override = {
-  zsh = {
-    icon = "",
-    color = "#428850",
-    name = "Zsh"
-  }
- };
- -- globally enable default icons (default to false)
- -- will get overriden by `get_icons` option
- default = true;
-}
-
-local actions = require('telescope.actions')
-
-require('telescope').setup{
-  defaults = {
-    -- Example:
-    shorten_path = true, -- currently the default value is true
-    mappings = {
-      i = {
-        ["<c-x>"] = false,
-        ["<c-h>"] = actions.goto_file_selection_split,
-        ["<c-o>"] = actions.goto_file_selection_tabedit,
-        ["<c-q>"] = actions.close,
-      },
-    },
-  }
-}
-EOF
-
-
-" Use <Tab> and <S-Tab> to navigate through popup menu
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-nnoremap <silent> <leader>dn :NextDiagnosticCycle<CR>
-nnoremap <silent> <leader>dp :PrevDiagnosticCycle<CR>
-nnoremap <silent> <leader>do :OpenDiagnostic<CR>
-
-nnoremap <silent> <leader>gr <cmd>lua require'telescope.builtin'.lsp_references{ shorten_path = true }<CR>
-nnoremap <silent> <leader>tl <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <silent> <leader>tq <cmd>lua require('telescope.builtin').quickfix()<cr>
-
-imap <silent> <c-n> <Plug>(completion_trigger)
-nnoremap <c-p> :lua require'telescope.builtin'.git_files{}<CR>
-nnoremap <leader><c-p> <cmd>lua require'telescope.builtin'.find_files()<CR>
-nnoremap ,<c-p> <cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ winblend = 20 }))<CR>
-
-
-let g:completion_enable_snippet = 'UltiSnips'
-let g:completion_sorting = "length"
-let g:space_before_virtual_text = 10
-let g:diagnostic_enable_virtual_text = 1
-let g:diagnostic_insert_delay = 1
-
-call sign_define("LspDiagnosticsErrorSign", {"text" : "🔺", "texthl" : "LspDiagnosticsError"})
-call sign_define("LspDiagnosticsWarningSign", {"text" : "⚠️ ", "texthl" : "LspDiagnosticsWarning"})
-call sign_define("LspDiagnosticInformationSign", {"text" : "ℹ️", "texthl" : "LspDiagnosticsInformation"})
-call sign_define("LspDiagnosticHintSign", {"text" : "H", "texthl" : "LspDiagnosticsHint"})
-
-let g:completion_trigger_keyword_length = 3
-let g:completion_timer_cycle = 200
-
-augroup CompletionTriggerCharacter
-    autocmd!
-    autocmd BufEnter * let g:completion_trigger_character = ['.']
-    autocmd BufEnter *.c,*.cpp let g:completion_trigger_character = ['.', '::']
-augroup end
-
-" Set completeopt to have a better completion experience
-set completeopt=menuone,noinsert,noselect
-
-" Avoid showing message extra message when using completion
-set shortmess+=c
-
-
 colorscheme gruvbox
-
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
 " let g:gruvbox_contrast_dark="soft"
 set background=dark
 let g:highlightedyank_highlight_duration = 200
@@ -425,31 +309,71 @@ let g:vimtex_view_method = 'skim'
 
 autocmd BufRead,BufNewFile *.md,gitcommit,tex setlocal spell
 
+function! CocCurrentFunction()
+    return get(b:, 'coc_current_function', '')
+endfunction
+
+function! StatusDiagnosticError() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info) | return ''| endif
+  let msgs = []
+  if get(info, 'error', 0)
+    call add(msgs, 'E:' . info['error'])
+  endif
+  return join(msgs, ' ')
+endfunction
+
+function! StatusDiagnosticWarning() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info) | return ''| endif
+  let msgs = []
+  if get(info, 'warning', 0)
+    call add(msgs, 'W:' . info['warning'])
+  endif
+  return join(msgs, ' ')
+endfunction
+
+function! GetPythonEnv() abort
+    let msg = get(g:, 'coc_status', '')
+    if &ft=='python'
+        return strpart(msg, 21)
+    else
+        return msg
+    endif
+endfunction
 
 let g:lightline = {
-                        \ 'colorscheme': 'gruvbox',
-                        \ 'active': {
-                        \   'left': [ [ 'mode', 'paste' ],
-                        \             [ 'gitbranch' ],[ 'readonly', 'absolutepath', 'modified' ] ],
-                        \ 'right': [ ['lineinfo'],
-                        \            [ 'percent' ],
-                        \            [ 'filetype', 'fileencoding'] ] },
-                        \ 'component_function': {
-                        \   'gitbranch': 'FugitiveHead',
-                        \ },
-                        \ 'component_type': {
-                        \ 'tabs': 'tabsel',
-                        \   'readonly': 'error',
-                        \ 'close': ''
-                        \ }
-                        \ }
+            \ 'colorscheme': 'gruvbox',
+            \ 'active': {
+            \   'left': [ [ 'mode', 'paste' ],
+            \             [ 'gitbranch' ],[ 'readonly', 'absolutepath', 'modified' ] ],
+		    \ 'right': [ ['cocstatuserror','cocstatuswarn','lineinfo'],
+		    \            [ 'percent' ],
+		    \            [ 'filetype','pyenv', 'fileencoding'] ] },
+            \ 'component_function': {
+            \   'gitbranch': 'FugitiveHead',
+            \   'pyenv': 'GetPythonEnv'
+            \ },
+            \ 'component_expand': {
+            \   'cocstatuserror': 'StatusDiagnosticError',
+            \   'cocstatuswarn': 'StatusDiagnosticWarning'
+            \ },
+            \ 'component_type': {
+            \   'cocstatuserror': 'error',
+            \   'cocstatuswarn': 'warning',
+            \ 'tabs': 'tabsel',
+            \   'readonly': 'error',
+            \ 'close': ''
+            \ }
+            \ }
 
 
 let g:lightline.enable = {
-                        \ 'statusline': 1,
-                        \ 'tabline': 1
-                        \ }
+            \ 'statusline': 1,
+            \ 'tabline': 1
+            \ }
 
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 let g:python3_host_prog="/usr/local/bin/python3"
 let g:gruvbox_color_column="bg3"
@@ -467,12 +391,12 @@ let g:netrw_winsize=15
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "{{{
 function! GitBranch()
-        return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
 endfunction
 
 function! StatuslineGit()
-        let l:branchname = GitBranch()
-        return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+  let l:branchname = GitBranch()
+  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
 endfunction
 
 
