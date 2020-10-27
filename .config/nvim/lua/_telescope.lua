@@ -21,7 +21,7 @@ require('telescope').setup{
 map('n','<leader>gr',":lua require('telescope.builtin').lsp_references{ shorten_path = true }<CR>",{noremap=true,silent=true})
 map('n','<leader>tl',":lua require('telescope.builtin').live_grep()<cr>",{noremap=true,silent=true})
 map('n','<leader>tq',":lua require('telescope.builtin').quickfix()<cr>",{noremap=true,silent=true})
-map('i','<c-n>','<Plug>(completion_trigger)',{noremap=true,silent=true})
+map('i','<c-n>','<Plug>(completion_trigger)',{silent=true})
 map('n','<c-p>',":lua require('telescope.builtin').git_files{}<CR>",{noremap=true,silent=true})
 map('n','<leader><c-p>',":lua require('telescope.builtin').find_files()<CR>",{noremap=true,silent=true})
 map('n',',<c-p>',":lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ winblend = 20 }))<CR>",{noremap=true,silent=true})

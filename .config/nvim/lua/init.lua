@@ -1,4 +1,5 @@
 local o = vim.o
+local wo = vim.wo
 local g = vim.g
 local a = vim.api
 
@@ -26,12 +27,15 @@ o.expandtab = true -- expand tab into space by default
 o.shortmess = vim.o.shortmess .. 'c'
 o.smartindent = true -- auto indent on new line (brackets for instance) BO
 o.formatoptions = o.formatoptions:gsub('[cro]', '')
+wo.number = true
+wo.relativenumber = true
+a.nvim_set_option('completeopt','menuone,noinsert,noselect')
 
 
 
-require 'plugins'
-require '_loadPlugins'
-require '_lsp'
+require'plugins'
+require'_loadPlugins'
+require'_lsp'.setup()
 require'_telescope'.setup()
 require'_nvimtree'.setup()
 require'_diagnostic'.setup()
@@ -39,43 +43,37 @@ require'_diagnostic'.setup()
 
 
 
-
-
-
 a.nvim_exec([[
-" we have to set these window options here because vim.o won't accept them and vim.wo wont set for each window automatically
-" and binding to an autocmd will mess with window that change those settings
-set relativenumber
-set nu
-set cursorline
-set linebreak
-set foldmethod=expr
-set completeopt=menuone,noinsert,noselect
-set foldexpr=nvim_treesitter#foldexpr()
-" Disable autocommenting on newline and retrieve last position
-au BufWinEnter * exec "normal! g'\""
-au FileType scheme set ft=query
-au FileType c,cpp set tabstop=4 shiftwidth=4 noexpandtab
-au FileType python set tabstop=4 shiftwidth=4 noexpandtab
-au FileType markdown set tabstop=4 shiftwidth=4 conceallevel=2
-au FileType typescriptreact,typescript,javascript,javascriptreact,lua set tabstop=2 shiftwidth=2
-au FileType vim set fdm=marker
-au TextYankPost * silent! lua require'vim.highlight'.on_yank({ timeout=500 })
+	" we have to set these window options here because vim.o won't accept them and vim.wo wont set for each window automatically
+	" and binding to an autocmd will mess with window that change those settings
+	set cursorline
+	set linebreak
+	set foldmethod=expr
+	set foldexpr=nvim_treesitter#foldexpr()
+	" Disable autocommenting on newline and retrieve last position
+	au BufWinEnter * exec "normal! g'\""
+	au FileType scheme set ft=query
+	au FileType c,cpp set tabstop=4 shiftwidth=4 noexpandtab
+	au FileType python set tabstop=4 shiftwidth=4 noexpandtab
+	au FileType markdown set tabstop=4 shiftwidth=4 conceallevel=2
+	au FileType typescriptreact,typescript,javascript,javascriptreact,lua set tabstop=2 shiftwidth=2
+	au FileType vim set fdm=marker
+	au TextYankPost * silent! lua require'vim.highlight'.on_yank({ timeout=500 })
 
-autocmd Filetype help nmap <silent><buffer> q :q<CR>
-autocmd Filetype help wincmd K
-autocmd FileType tex nnoremap <F5> :silent VimtexCompile<CR>
-autocmd FileType tex inoremap <F5> <esc>:silent VimtexCompile<CR>
-augroup CompletionTriggerCharacter
-    autocmd!
-    autocmd BufEnter * let g:completion_trigger_character = ['.']
-    autocmd BufEnter *.c,*.cpp let g:completion_trigger_character = ['.', '::']
-augroup end
+	autocmd Filetype help nmap <silent><buffer> q :q<CR>
+	autocmd Filetype help wincmd K
+	autocmd FileType tex nnoremap <F5> :silent VimtexCompile<CR>
+	autocmd FileType tex inoremap <F5> <esc>:silent VimtexCompile<CR>
+	augroup CompletionTriggerCharacter
+	autocmd!
+	autocmd BufEnter * let g:completion_trigger_character = ['.']
+	autocmd BufEnter *.c,*.cpp let g:completion_trigger_character = ['.', '::']
+	augroup end
 
-cabbrev W w
-cabbrev E e
-cabbrev Wq wq
-]], '')
+	cabbrev W w
+	cabbrev E e
+	cabbrev Wq wq
+	]], '')
 
 local map = require('_utils').map
 
@@ -137,9 +135,34 @@ map('c','<C-f>','<Right>',{})
 --LuaTree
 map('i','<Tab>',"pumvisible() ? \"\\<C-n>\" : \"\\<Tab>\"",{expr=true,noremap=true})
 map('i','<S-Tab>',"pumvisible() ? \"\\<C-p>\" : \"\\<S-Tab>\"",{expr=true,noremap=true})
-
-
-
+map('n','<leader>cc',':silent !tmux send-keys -t 1 "g++"" "% "C-m"<cr>',{})
+map('n','<leader>rr',':silent !tmux send-keys -t 1 "./a.out" "C-m"<cr>',{})
+--window movement
+-- map('t','<A-h>',"<C-\\><C-N><C-w>h",{noremap=true})
+-- map('t','<A-j>',"<C-\\><C-N><C-w>j",{noremap=true})
+-- map('t','<A-k>',"<C-\\><C-N><C-w>k",{noremap=true})
+-- map('t','<A-l>',"<C-\\><C-N><C-w>l",{noremap=true})
+-- map('i','<A-h>',"<C-\\><C-N><C-w>h",{noremap=true})
+-- map('i','<A-j>',"<C-\\><C-N><C-w>j",{noremap=true})
+-- map('i','<A-k>',"<C-\\><C-N><C-w>k",{noremap=true})
+-- map('i','<A-l>',"<C-\\><C-N><C-w>l",{noremap=true})
+-- map('n','<A-h>',"<C-w>h",{noremap=true})
+-- map('n','<A-j>',"<C-w>j",{noremap=true})
+-- map('n','<A-k>',"<C-w>k",{noremap=true})
+-- map('n','<A-l>',"<C-w>l",{noremap=true})
+--resize
+-- map('t','<S-left>',"<C-\\><C-n><C-w>3>",{noremap=true})
+-- map('t','<S-right>',"<C-\\><C-n><C-w>3<",{noremap=true})
+-- map('t','<S-down>',"<C-\\><C-n><C-w>3-",{noremap=true})
+-- map('t','<S-up>',"<C-\\><C-n><C-w>3+",{noremap=true})
+-- map('n','<S-left>',"<C-w>3>",{noremap=true})
+-- map('n','<S-right>',"<C-w>3<",{noremap=true})
+-- map('n','<S-down>',"<C-w>3-",{noremap=true})
+-- map('n','<S-up>',"<C-w>3+",{noremap=true})
+-- map('i','<S-left>',"<C-w>3>",{noremap=true})
+-- map('i','<S-right>',"<C-w>3<",{noremap=true})
+-- map('i','<S-down>',"<C-w>3-",{noremap=true})
+-- map('i','<S-up>',"<C-w>3+",{noremap=true})
 
 
 
@@ -148,27 +171,27 @@ g.tex_flavor = "latex"
 g.vimtex_view_method = 'skim'
 
 g.lightline = {
- colorscheme= 'gruvbox',
-  active= {
-    left= { { 'mode', 'paste' },
-    { 'gitbranch' },{ 'readonly', 'absolutepath', 'modified' } },
-    right= { {'lineinfo'},
-    { 'percent' },
-    { 'filetype', 'fileencoding'} } },
-    component_function= {
-      gitbranch= 'FugitiveHead',
-    },
-    component_type= {
-      tabs= 'tabsel',
-      readonly= 'error',
-      close= ''
-    }
-  }
+	colorscheme= 'gruvbox',
+	active= {
+		left= { { 'mode', 'paste' },
+			{ 'gitbranch' },{ 'readonly', 'absolutepath', 'modified' } },
+		right= { {'lineinfo'},
+			{ 'percent' },
+			{ 'filetype', 'fileencoding'} } },
+	component_function= {
+		gitbranch= 'FugitiveHead',
+	},
+	component_type= {
+		tabs= 'tabsel',
+		readonly= 'error',
+		close= ''
+	}
+}
 
 g.lightline.enable = {
-    statusline= 1,
-    tabline= 1
-  }
+	statusline= 1,
+	tabline= 1
+}
 
 g.python3_host_prog="/usr/local/bin/python3"
 g.completion_sorting = "length"
