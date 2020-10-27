@@ -19,6 +19,4 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
-brew install alexjs autojump bat dark-mode exa fzf git gmp gnupg grep llvm lua luajit mas neovim node pass proselint python@3.8 reattach-to-user-namespace ripgrep ruby sqlite telnet tldr tmux tree
-
 source ~/.zshrc
