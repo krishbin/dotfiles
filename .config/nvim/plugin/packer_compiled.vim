@@ -160,6 +160,8 @@ end
 
 -- Pre-load configuration
 -- Post-load configuration
+-- Config for: nvim-web-devicons
+loadstring("\27LJ\1\2O\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0>\0\2\1G\0\1\0\1\0\1\fdefault\2\nsetup\22nvim-web-devicons\frequire\0")()
 -- Config for: lightline.vim
 loadstring("\27LJ\1\2\v\0\0\1\0\0\0\1G\0\1\0\0")()
 -- Config for: gruvbox
