@@ -22,8 +22,8 @@ hs.fnutils.each({
         { key = "i", app = "iTerm"},
         { key = "m", app = "VimR"},
         { key = "r", app = "Skim"},
-        { key = "s", app = "Safari"},
-        { key = "e", app = "Mail"},
+        { key = "b", app = "Safari"},
+        { key = "t", app = "Mail"},
         { key = "p", app = "Preview"},
         { key = "x", app = "Xcode"},
 },function(object)

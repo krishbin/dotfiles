@@ -6,12 +6,12 @@ local a = vim.api
 g.mapleader = ' '
 g.maplocalleader = ','
 
-o.updatetime = 800
+o.updatetime = 400
 o.foldlevelstart = 99
 o.termguicolors = true
 o.ignorecase = true -- Ignore case
 o.confirm = true -- Disable 'no write'
-o.scrolloff = 8 -- Lines from the cursor
+o.scrolloff = 4 -- Lines from the cursor
 o.incsearch = true -- Move cursor during search
 o.splitright = true -- Splits open on the right
 o.splitbelow = true -- Splits open on the bottom
@@ -26,11 +26,8 @@ o.shiftwidth = 4 -- Number of space for autoindent BO
 o.expandtab = true -- expand tab into space by default
 o.shortmess = vim.o.shortmess .. 'c'
 o.smartindent = true -- auto indent on new line (brackets for instance) BO
+o.textwidth = 80
 o.formatoptions = o.formatoptions:gsub('[cro]', '')
-wo.number = true
-wo.relativenumber = true
-a.nvim_set_option('completeopt','menuone,noinsert,noselect')
-
 
 
 require'plugins'
@@ -39,15 +36,22 @@ require'_lsp'.setup()
 require'_telescope'.setup()
 require'_nvimtree'.setup()
 require'_diagnostic'.setup()
-
+require'_snips'.setup()
 
 
 
 a.nvim_exec([[
 	" we have to set these window options here because vim.o won't accept them and vim.wo wont set for each window automatically
 	" and binding to an autocmd will mess with window that change those settings
+
+	set nu
+	set rnu
+	set completeopt=menuone,noinsert,noselect
 	set cursorline
 	set linebreak
+	if has("autocmd")
+	filetype plugin indent on
+	endif
 	set foldmethod=expr
 	set foldexpr=nvim_treesitter#foldexpr()
 	" Disable autocommenting on newline and retrieve last position
@@ -69,6 +73,7 @@ a.nvim_exec([[
 	autocmd BufEnter * let g:completion_trigger_character = ['.']
 	autocmd BufEnter *.c,*.cpp let g:completion_trigger_character = ['.', '::']
 	augroup end
+	autocmd FileType markdown set foldexpr=NestedMarkdownFolds()
 
 	cabbrev W w
 	cabbrev E e
@@ -135,8 +140,15 @@ map('c','<C-f>','<Right>',{})
 --LuaTree
 map('i','<Tab>',"pumvisible() ? \"\\<C-n>\" : \"\\<Tab>\"",{expr=true,noremap=true})
 map('i','<S-Tab>',"pumvisible() ? \"\\<C-p>\" : \"\\<S-Tab>\"",{expr=true,noremap=true})
-map('n','<leader>cc',':silent !tmux send-keys -t 1 "g++"" "% "C-m"<cr>',{})
-map('n','<leader>rr',':silent !tmux send-keys -t 1 "./a.out" "C-m"<cr>',{})
+map('n','<leader>co',':silent !tmux send-keys -t 1 "./configure.sh" "C-m"<cr>',{})
+map('n','<leader>cc',':silent !tmux send-keys -t 1 "./build.sh" "C-m"<cr>',{})
+map('n','<leader>rr',':silent !tmux send-keys -t 1 "./run.sh" "C-m"<cr>',{})
+-- map('i',	'(',	'()<Esc>i',{noremap=true})
+-- map('i',	'{',	'{}<Esc>i',{noremap=true})
+-- map('i',	'{',	'<CR> {<CR>}<Esc>O',{noremap=true})
+-- map('i',	'[',	'[]<Esc>i',{noremap=true})
+-- map('i',	"'",	"''<Esc>i",{noremap=true})
+-- map('i',	'"',	'""<Esc>i',{noremap=true})
 --window movement
 -- map('t','<A-h>',"<C-\\><C-N><C-w>h",{noremap=true})
 -- map('t','<A-j>',"<C-\\><C-N><C-w>j",{noremap=true})
@@ -170,6 +182,9 @@ map('n','<leader>rr',':silent !tmux send-keys -t 1 "./a.out" "C-m"<cr>',{})
 g.tex_flavor = "latex"
 g.vimtex_view_method = 'skim'
 
+g.signify_disable_by_default=1
+
+
 g.lightline = {
 	colorscheme= 'gruvbox',
 	active= {
@@ -200,3 +215,9 @@ g.completion_timer_cycle = 200
 g.gruvbox_color_column="bg3"
 g.vimtex_enabled=1
 g.vimtex_fold_enabled=1
+g.startify_bookmarks = {
+	{ i='~/.config/nvim/lua/init.lua'},
+	{ s='~/.config/nvim/lua/_snips.lua'},
+	{ z='~/.zshrc' },
+	{ p='~/Workshop/cpp/major_project/src/main.cpp' },
+}

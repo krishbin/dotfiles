@@ -5,8 +5,8 @@ function M.setup()
   vim.g.lua_tree_side = 'left'
   vim.g.lua_tree_width = 30
   vim.g.lua_tree_ignore = { '.git', 'node_modules', '.cache' }
-  vim.g.lua_tree_auto_open = 1
-  vim.g.lua_tree_quit_on_open = 1
+  vim.g.lua_tree_auto_open = 0
+  vim.g.lua_tree_quit_on_open = 0
   vim.g.lua_tree_follow = 1
   vim.g.lua_tree_indent_markers = 1
   vim.g.lua_tree_hide_dotfiles = 1

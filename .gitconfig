@@ -1,8 +1,8 @@
 # This is Git's per-user configuration file.
 [user]
 # Please adapt and uncomment the following lines:
-        name = Krishbin Paudel
-        email = krishbinp@outlook.com
+	name = krishbin
+	email = krishbinp@outlook.com
 [ui "color"]
         ui = always
 [color]
@@ -46,3 +46,5 @@
         tool = nvim -d
 [github]
         user = krishbin
+[core]
+	editor = /usr/bin/vim

@@ -43,18 +43,13 @@ sign_define(
 {text = "➤", texthl = "LspDiagnosticsHint"}
 )
 
-command("autocmd CursorHold <buffer> lua vim.lsp.util.show_line_diagnostics()")
-command("autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()")
-command("autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()")
-command("autocmd CursorMoved <buffer> lua vim.lsp.util.buf_clear_references()")
-
 vim.g.space_before_virtual_text = 10
-vim.g.diagnostic_trimmed_virtual_text = "40"
+vim.g.diagnostic_trimmed_virtual_text = "60"
 vim.g.diagnostic_enable_virtual_text = 1
 vim.g.diagnostic_insert_delay = 1
 
-map('n','<leader>dn',':NextDiagnosticCycle<CR>',{noremap=true,silent=true})
-map('n','<leader>dp',':PrevDiagnosticCycle<CR>',{noremap=true,silent=true})
+map('n','<leader>]d',':NextDiagnosticCycle<CR>',{noremap=true,silent=true})
+map('n','<leader>[d',':PrevDiagnosticCycle<CR>',{noremap=true,silent=true})
 map('n','<leader>do',':OpenDiagnostic<CR>',{noremap=true,silent=true})
 
 end

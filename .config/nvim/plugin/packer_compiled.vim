@@ -24,6 +24,18 @@ local plugins = {
     only_setup = false,
     path = "/Users/krispy/.local/share/nvim/site/pack/packer/opt/vim-javascript"
   },
+  ["vim-markdown"] = {
+    loaded = false,
+    only_sequence = false,
+    only_setup = false,
+    path = "/Users/krispy/.local/share/nvim/site/pack/packer/opt/vim-markdown"
+  },
+  ["vim-markdown-folding"] = {
+    loaded = false,
+    only_sequence = false,
+    only_setup = false,
+    path = "/Users/krispy/.local/share/nvim/site/pack/packer/opt/vim-markdown-folding"
+  },
   ["vim-vue"] = {
     loaded = false,
     only_sequence = false,
@@ -99,7 +111,6 @@ _packer_load = function(names, cause)
   for _, name in ipairs(names) do
     if not plugins[name].loaded then
       vim.cmd('packadd ' .. name)
-      vim._update_package_paths()
       if plugins[name].config then
         for _i, config_line in ipairs(plugins[name].config) do
           loadstring(config_line)()
@@ -168,7 +179,6 @@ loadstring("\27LJ\1\2\v\0\0\1\0\0\0\1G\0\1\0\0")()
 loadstring("\27LJ\1\0027\0\0\2\0\3\0\0054\0\0\0007\0\1\0%\1\2\0>\0\2\1G\0\1\0\24colorscheme gruvbox\bcmd\bvim\0")()
 -- Conditional loads
 -- Load plugins in order defined by `after`
-vim._update_package_paths()
 END
 
 function! s:load(names, cause) abort
@@ -183,10 +193,11 @@ endfunction
 augroup packer_load_aucmds
   au!
   " Filetype lazy-loads
-  au FileType html ++once call s:load(['vim-vue'], { "ft": "html" })
-  au FileType vue ++once call s:load(['vim-vue'], { "ft": "vue" })
   au FileType js ++once call s:load(['vim-javascript'], { "ft": "js" })
-  au FileType dart ++once call s:load(['dart-vim-plugin'], { "ft": "dart" })
+  au FileType vue ++once call s:load(['vim-vue'], { "ft": "vue" })
+  au FileType md ++once call s:load(['vim-markdown-folding', 'vim-markdown'], { "ft": "md" })
   au FileType tex ++once call s:load(['vimtex'], { "ft": "tex" })
+  au FileType html ++once call s:load(['vim-vue'], { "ft": "html" })
+  au FileType dart ++once call s:load(['dart-vim-plugin'], { "ft": "dart" })
   " Event lazy-loads
 augroup END

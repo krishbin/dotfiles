@@ -1,61 +1,76 @@
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function()
-	use {'wbthomason/packer.nvim', opt = true}
+    use {'wbthomason/packer.nvim', opt = true}
 
-	use 'bronson/vim-trailing-whitespace'
-	use {
-		'itchyny/lightline.vim',
-		config = function()
+    use 'bronson/vim-trailing-whitespace'
 
-		end}
-		use 'tpope/vim-surround'
-		use 'tpope/vim-commentary'
-		use 'tpope/vim-fugitive'
+    use {'mhinz/vim-startify'}
+    use {'romgrk/nvim-treesitter-context'}
+    use {'mhinz/vim-signify'}
 
-		use {
-			'pangloss/vim-javascript',
-			ft = {'js'}
-		}
+    use {
+        'itchyny/lightline.vim',
+        config = function()
 
-		use {
-			'posva/vim-vue',
-			ft = {'html','vue'}
-		}
+        end}
+    use 'tpope/vim-surround'
+    use 'tpope/vim-commentary'
+    use 'tpope/vim-fugitive'
 
-		use {'morhetz/gruvbox',
-		config = function() vim.cmd "colorscheme gruvbox" end
-	}
+    use {
+        'pangloss/vim-javascript',
+        ft = {'js'}
+      }
 
-	use {
-		'neovim/nvim-lspconfig',
-		'nvim-lua/completion-nvim',
-		'nvim-lua/diagnostic-nvim'
-	}
+    use {
+        'posva/vim-vue',
+        ft = {'html','vue'}
+      }
 
-	use {'nvim-lua/popup.nvim'}
-	use {'nvim-lua/plenary.nvim'}
-	use {'nvim-lua/telescope.nvim'}
-	use {'kyazdani42/nvim-web-devicons',
-	config=function()
-		require'nvim-web-devicons'.setup {
-			default = true;
-		}
-	end
-}
+    use {'tpope/vim-markdown',
+      ft = {'md'}
+      }
 
-use {
-	'kyazdani42/nvim-tree.lua',
-}
+    use {'masukomi/vim-markdown-folding',
+      ft = {'md'}
+      }
 
-use {'nvim-treesitter/nvim-treesitter'}
+    use {'norcalli/snippets.nvim'}
 
-use {'dart-lang/dart-vim-plugin',
-ft = {'dart'}
-}
+    use {'morhetz/gruvbox',
+	config=function() vim.cmd('colorscheme gruvbox')end
+      }
 
-use {'lervag/vimtex',
-ft = {'tex'}
-			}
+    use {
+        'neovim/nvim-lspconfig',
+        'nvim-lua/completion-nvim',
+        'nvim-lua/diagnostic-nvim'
+      }
 
-		end)
+    use {'nvim-lua/popup.nvim'}
+    use {'nvim-lua/plenary.nvim'}
+    use {'nvim-lua/telescope.nvim'}
+    use {'kyazdani42/nvim-web-devicons',
+        config=function()
+          require'nvim-web-devicons'.setup {
+              default = true;
+            }
+        end
+      }
+
+    use {
+        'kyazdani42/nvim-tree.lua',
+      }
+
+    use {'nvim-treesitter/nvim-treesitter'}
+
+    use {'dart-lang/dart-vim-plugin',
+        ft = {'dart'}
+      }
+
+    use {'lervag/vimtex',
+        ft = {'tex'}
+      }
+
+  end)

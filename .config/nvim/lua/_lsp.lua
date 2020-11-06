@@ -7,16 +7,18 @@ local function on_attach(client)
 
 	local map = require('_utils').map
   map('i', '<c-space>',  'completion#trigger_completion()')
-  map('n', 'K',          '<cmd>lua require"lsp".show_doc()<CR>')
-  map('n', '<leader>k',      '<cmd>lua require"lsp".hover()<CR>')
-
+  -- map('n', 'K',          '<cmd>lua .show_doc()<CR>')
   map('n', 'gr',         '<cmd>lua vim.lsp.buf.references()<CR>')
   map('n', 'gd',         '<cmd>lua vim.lsp.buf.definition()<CR>')
   map('n', 'gy',         '<cmd>lua vim.lsp.buf.type_definition()<CR>')
-  map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
 
-  map('n', '<leader>s',  '<cmd>lua require"lsp_cbs.diagnostics".prev()<CR>')
-  map('n', '<leader>d',  '<cmd>lua require"lsp_cbs.diagnostics".next()<CR>')
+	if client.resolved_capabilities['document_highlight'] then
+  vim.cmd("autocmd CursorHold <buffer> lua vim.lsp.util.show_line_diagnostics()")
+	vim.cmd("autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()")
+	vim.cmd("autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()")
+	vim.cmd("autocmd CursorMoved <buffer> lua vim.lsp.util.buf_clear_references()")
+	end
+
 end
 
 local lang_servers = {
@@ -25,6 +27,7 @@ local lang_servers = {
 	{lsp_name = "jedi_language_server"},
 	{lsp_name = "sumneko_lua"},
 	{lsp_name = "tsserver"},
+	{lsp_name = "cmake"},
 }
 
 function M.setup()
