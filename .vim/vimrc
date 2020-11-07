@@ -1,3 +1,2 @@
-set guifont=JetBrains\ Mono:h11
-set laststatus=2
-set guioptions=
+let mapleader = "\<Space>"
+let maplocalleader = ","

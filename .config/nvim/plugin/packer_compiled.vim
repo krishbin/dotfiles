@@ -176,7 +176,7 @@ loadstring("\27LJ\1\2O\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0>\0\2
 -- Config for: lightline.vim
 loadstring("\27LJ\1\2\v\0\0\1\0\0\0\1G\0\1\0\0")()
 -- Config for: gruvbox
-loadstring("\27LJ\1\0027\0\0\2\0\3\0\0054\0\0\0007\0\1\0%\1\2\0>\0\2\1G\0\1\0\24colorscheme gruvbox\bcmd\bvim\0")()
+loadstring('\27LJ\1\2i\0\0\2\0\4\0\t4\0\0\0007\0\1\0%\1\2\0>\0\2\0014\0\0\0007\0\1\0%\1\3\0>\0\2\1G\0\1\0& let g:gruvbox_color_column="bg3"\24colorscheme gruvbox\bcmd\bvim\0')()
 -- Conditional loads
 -- Load plugins in order defined by `after`
 END

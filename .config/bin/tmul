@@ -3,8 +3,8 @@ if [[ -z "$TMUX" ]]; then
     echo "You are not in a Tmux Session"
 else
     case $1 in
-        (win) tmux new-window -n notes
-              tmux new-window -n test
+        (win) tmux new-window -n testing
+              tmux new-window -n debug
               tmux select-window -t 1
               ;;
         (webwin) tmux new-window -n server

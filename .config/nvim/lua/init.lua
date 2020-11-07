@@ -46,6 +46,7 @@ a.nvim_exec([[
 
 	set nu
 	set rnu
+	set colorcolumn=100
 	set completeopt=menuone,noinsert,noselect
 	set cursorline
 	set linebreak
@@ -74,6 +75,8 @@ a.nvim_exec([[
 	autocmd BufEnter *.c,*.cpp let g:completion_trigger_character = ['.', '::']
 	augroup end
 	autocmd FileType markdown set foldexpr=NestedMarkdownFolds()
+
+	autocmd Filetype c,cpp nnoremap <leader><C-s> m`:w!<cr>:%!clang-format %<cr>:w<cr>``
 
 	cabbrev W w
 	cabbrev E e
@@ -143,47 +146,11 @@ map('i','<S-Tab>',"pumvisible() ? \"\\<C-p>\" : \"\\<S-Tab>\"",{expr=true,norema
 map('n','<leader>co',':silent !tmux send-keys -t 1 "./configure.sh" "C-m"<cr>',{})
 map('n','<leader>cc',':silent !tmux send-keys -t 1 "./build.sh" "C-m"<cr>',{})
 map('n','<leader>rr',':silent !tmux send-keys -t 1 "./run.sh" "C-m"<cr>',{})
--- map('i',	'(',	'()<Esc>i',{noremap=true})
--- map('i',	'{',	'{}<Esc>i',{noremap=true})
--- map('i',	'{',	'<CR> {<CR>}<Esc>O',{noremap=true})
--- map('i',	'[',	'[]<Esc>i',{noremap=true})
--- map('i',	"'",	"''<Esc>i",{noremap=true})
--- map('i',	'"',	'""<Esc>i',{noremap=true})
---window movement
--- map('t','<A-h>',"<C-\\><C-N><C-w>h",{noremap=true})
--- map('t','<A-j>',"<C-\\><C-N><C-w>j",{noremap=true})
--- map('t','<A-k>',"<C-\\><C-N><C-w>k",{noremap=true})
--- map('t','<A-l>',"<C-\\><C-N><C-w>l",{noremap=true})
--- map('i','<A-h>',"<C-\\><C-N><C-w>h",{noremap=true})
--- map('i','<A-j>',"<C-\\><C-N><C-w>j",{noremap=true})
--- map('i','<A-k>',"<C-\\><C-N><C-w>k",{noremap=true})
--- map('i','<A-l>',"<C-\\><C-N><C-w>l",{noremap=true})
--- map('n','<A-h>',"<C-w>h",{noremap=true})
--- map('n','<A-j>',"<C-w>j",{noremap=true})
--- map('n','<A-k>',"<C-w>k",{noremap=true})
--- map('n','<A-l>',"<C-w>l",{noremap=true})
---resize
--- map('t','<S-left>',"<C-\\><C-n><C-w>3>",{noremap=true})
--- map('t','<S-right>',"<C-\\><C-n><C-w>3<",{noremap=true})
--- map('t','<S-down>',"<C-\\><C-n><C-w>3-",{noremap=true})
--- map('t','<S-up>',"<C-\\><C-n><C-w>3+",{noremap=true})
--- map('n','<S-left>',"<C-w>3>",{noremap=true})
--- map('n','<S-right>',"<C-w>3<",{noremap=true})
--- map('n','<S-down>',"<C-w>3-",{noremap=true})
--- map('n','<S-up>',"<C-w>3+",{noremap=true})
--- map('i','<S-left>',"<C-w>3>",{noremap=true})
--- map('i','<S-right>',"<C-w>3<",{noremap=true})
--- map('i','<S-down>',"<C-w>3-",{noremap=true})
--- map('i','<S-up>',"<C-w>3+",{noremap=true})
-
-
-
 
 g.tex_flavor = "latex"
 g.vimtex_view_method = 'skim'
 
 g.signify_disable_by_default=1
-
 
 g.lightline = {
 	colorscheme= 'gruvbox',

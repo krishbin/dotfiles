@@ -39,7 +39,9 @@ return require('packer').startup(function()
     use {'norcalli/snippets.nvim'}
 
     use {'morhetz/gruvbox',
-	config=function() vim.cmd('colorscheme gruvbox')end
+	config=function() vim.cmd('colorscheme gruvbox')
+					vim.cmd(' let g:gruvbox_color_column="bg3"')
+				end
       }
 
     use {
