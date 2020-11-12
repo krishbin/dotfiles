@@ -14,9 +14,8 @@ fi
 
 config config --local status.showUntrackedFiles no
 
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+brew install autojump bat cmake dark-mode exa fd fzf gh gitui glfw glm grep llvm lua luajit luarocks ncdu neovim nettle node openssl@1.1 pkg-config python@3.8 python@3.9 ripgrep texlab tldr tmux tree tree-sitter
 
 source ~/.zshrc

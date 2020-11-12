@@ -38,11 +38,17 @@ return require('packer').startup(function()
 
     use {'norcalli/snippets.nvim'}
 
+    use {'nvim-lua/lsp-status.nvim'}
+
+    use {'tjdevries/nlua.nvim'}
+
     use {'morhetz/gruvbox',
-	config=function() vim.cmd('colorscheme gruvbox')
-					vim.cmd(' let g:gruvbox_color_column="bg3"')
+	config=function() 
+          vim.cmd('colorscheme gruvbox')
 				end
       }
+
+    use {'tikhomirov/vim-glsl'}
 
     use {
         'neovim/nvim-lspconfig',

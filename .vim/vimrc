@@ -1,2 +1,167 @@
+call plug#begin('~/.vim/plugged')
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'machakann/vim-highlightedyank'
+Plug 'itchyny/lightline.vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'morhetz/gruvbox'
+Plug 'lervag/vimtex'
+Plug 'preservim/nerdtree'
+call plug#end()
+
+set nu
+set rnu                                  "line number
+set hidden                               "allow buffer to change w/o saving
+set lazyredraw                           "dont execute while running macros
+set laststatus=2
+set termguicolors
+set history=1000                         "remember last thousand commands
+set showmatch                            "show matching bracket
+set hlsearch                             "highlight the search results
+set incsearch                            "highlight search results as you type
+set splitbelow
+set splitright
+autocmd Filetype tex set conceallevel=1
+let g:tex_conceal='abdmg'
+set backspace=indent,eol,start
+set ruler
+set colorcolumn=80
+syntax enable
+syntax on                                "syntax highlighting
+set encoding=utf-8
+set numberwidth=4
+set autoread                             "autoread file if it is changed in buffer
+set expandtab
+set autoindent
+set autochdir                            "autochange directory on the basis of what file you are editing
+set clipboard^=unnamed                   "add system clipboard support
+set clipboard^=unnamedplus
+set wildmenu                             "command line completion
+set cursorline
+set path+=**
+autocmd FileType vim set fdm=marker                           "folding files
+filetype indent on
+filetype plugin on
+
+map Q <nop>
+nnoremap <silent> Q :cclose<CR>:lclose<CR>
+nnoremap <leader>W :wq<cr>
+"make it easier to edit and quit files
+":Q also quits vim
+command! Q q
+":E also acts as edit
+command! E e
+":Wq also writes and quits
+command! Wq wq
+":x also writes and quits
+command! Wq x
+
+autocmd Filetype tex map <silent> <leader>gk :silent !/Applications/Skim.app/Contents/SharedSupport/displayline <C-R>=line('.')<CR> "%:p:r.pdf" "%:p" <CR>
+autocmd Filetype tex map <silent> <leader>gl :silent !/Applications/Skim.app/Contents/SharedSupport/displayline <C-R>=line('.')<CR> "main.pdf" "%:p" <CR>
+
+"quit help file like man pages
+autocmd Filetype help nmap <silent><buffer> q :q<CR>
+autocmd Filetype help wincmd K
+autocmd FileType tex nnoremap <F5> :silent VimtexCompile<CR>
+autocmd FileType tex inoremap <F5> <esc>:silent VimtexCompile<CR>
+"easily switch between buffer
+nnoremap <silent>]b :bn<cr>
+nnoremap <silent>[b :bp<cr>
+"insert a html bare snippet
+"make space as the leader key
 let mapleader = "\<Space>"
 let maplocalleader = ","
+"change vim window quickly by leader hjkl
+nnoremap <leader>h <C-w>h
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
+nnoremap <leader>l <C-w>l
+"indent all lines of the file
+nnoremap <leader>ia gg=G<C-o>
+"keep selecting the text after indenting in visual mode
+"clear highlighting
+nnoremap <silent><leader>ch :noh<CR>
+"treat a long line like multiline if it appears in two line
+nnoremap j gj
+nnoremap k gk
+"open a new tab
+nnoremap <leader>to :<C-u>tabnew<cr>
+" move tab right
+noremap <silent><A-Left>  :-tabmove<cr>
+noremap <silent><A-Right> :+tabmove<cr>
+"left explorer
+nmap <leader>e :NERDTreeCWD<cr>
+"open a file explorer
+nmap <leader>o :NERDTreeToggle<cr>
+"copy all the content of the file
+nmap <leader>ya gg0VG"*y
+"delete all content of the file
+nmap <leader>da gg0VG"*d
+"edit init.vim in a new tab
+nmap <leader>vi :tabe $MYVIMRC<cr>
+nmap <silent><leader>so :source $MYVIMRC<cr>
+vnoremap < <gv
+vnoremap > >gv
+"move a visual block up or down a line
+vnoremap <silent><leader>k :move-2<CR>gv=gv
+vnoremap <silent><leader>j :move'>+<CR>gv=gv
+vnoremap <leader>y "*y
+"split vertical or horizontal and move cursor to the new split
+map <leader>sh :split<cr>
+map <leader>sv :vsplit<cr>
+"Ctrl-s writes to the file
+nmap <C-s> :w<cr>
+imap <C-s> <Esc>:w<cr>
+nnoremap <leader>aj m`o<esc>``
+nnoremap <leader>ak m`O<esc>``
+cnoremap <C-a> <Home>
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+cnoremap <Up> <C-p>
+cnoremap <Down> <C-n>
+
+colorscheme gruvbox
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+set background=dark
+let g:highlightedyank_highlight_duration = 200
+let g:vimtex_compiler_progname = 'nvr'
+
+let g:tex_flavor = "latex"
+let g:vimtex_view_method = 'skim'
+
+autocmd BufRead,BufNewFile *.md,gitcommit,tex setlocal spell
+
+let g:lightline = {
+                        \ 'colorscheme': 'gruvbox',
+                        \ 'active': {
+                        \   'left': [ [ 'mode', 'paste' ],
+                        \             [ 'gitbranch' ],[ 'readonly', 'absolutepath', 'modified' ] ],
+                        \ 'right': [ ['lineinfo'],
+                        \            [ 'percent' ],
+                        \            [ 'filetype', 'fileencoding'] ] },
+                        \ 'component_function': {
+                        \   'gitbranch': 'FugitiveHead',
+                        \ },
+                        \ 'component_type': {
+                        \ 'tabs': 'tabsel',
+                        \   'readonly': 'error',
+                        \ 'close': ''
+                        \ }
+                        \ }
+
+
+let g:lightline.enable = {
+                        \ 'statusline': 1,
+                        \ 'tabline': 1
+                        \ }
+
+let g:gruvbox_color_column="bg3"
+let g:vimtex_enabled=1
+let g:vimtex_fold_enabled=1

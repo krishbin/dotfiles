@@ -28,7 +28,7 @@ function M.setup()
 
 sign_define(
 "LspDiagnosticsErrorSign",
-{text = "", texthl = "LspDiagnosticsError"}
+{text = "❌", texthl = "LspDiagnosticsError"}
 )
 sign_define(
 "LspDiagnosticsWarningSign",
@@ -36,7 +36,7 @@ sign_define(
 )
 sign_define(
 "LspDiagnosticsInformationSign",
-{text = "כֿ", texthl = "LspDiagnosticsInformation"}
+{text = "", texthl = "LspDiagnosticsInformation"}
 )
 sign_define(
 "LspDiagnosticsHintSign",

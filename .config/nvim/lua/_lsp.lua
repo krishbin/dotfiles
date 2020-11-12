@@ -21,6 +21,14 @@ local function on_attach(client)
 
 end
 
+require('nlua.lsp.nvim').setup(require('nvim_lsp'), {
+  on_attach = on_attach,
+
+  globals = {
+    "Color", "c", "Group", "g", "s",
+  }
+})
+
 local lang_servers = {
 	{lsp_name = "clangd"},
 	{lsp_name = "texlab"},

@@ -3,16 +3,23 @@
 trim(){ echo "$1"}
 status_bat="$(trim `pmset -g batt | grep -Po "AC" | cut -f 1 -d:`)"
 charge=$(pmset -g batt | grep -Po "\d+%"| grep -Po "\d+")
-if [[ $charge -gt 50 || "$status_bat" = "AC" ]];then
-    out_value="#[fg=colour72,bg=colour236]"
-elif [[ charge -gt 25 ]];then
-    out_value="#[fg=colour178]"
+battery_color="#[fg=colour252,bg=colour236]"
+
+if [[ $charge -gt 94 ]];then
+    battery_sign=""
+elif [[ charge -gt 65 ]];then
+    battery_sign=""
+elif [[ charge -gt 45 ]];then
+    battery_sign=""
+elif [[ charge -gt 20 ]];then
+    battery_sign=""
 else
-    out_value= "❗️#[fg=colour88]"
+    battery_sign=""
+    battery_color="#[fg=colour88,bg=colour250]"
 fi;
 
 if [[ "$status_bat" = "AC" ]];then
-    echo "$out_value $charge%#[bg=colour72] #[bg=colour236]"
+    echo "#[fg=colour72,bg=colour236] $charge $battery_sign #[bg=colour236]"
 else
-    echo "$out_value $charge%"
+    echo "$battery_color $charge $battery_sign "
 fi;
